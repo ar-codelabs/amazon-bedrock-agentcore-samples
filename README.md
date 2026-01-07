@@ -1,3 +1,5 @@
+* https://github.com/awslabs/amazon-bedrock-agentcore-samples 한글 번역 repo입니다.
+
 <div align="center">
   <div>
     <a href="https://aws.amazon.com/bedrock/agentcore/">
