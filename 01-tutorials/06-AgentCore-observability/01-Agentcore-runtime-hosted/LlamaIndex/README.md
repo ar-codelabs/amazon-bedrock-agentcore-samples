@@ -1,8 +1,8 @@
 # LlamaIndex Agent with Amazon Bedrock AgentCore Runtime and Observability
 
-This tutorial demonstrates how to deploy a [LlamaIndex agent](https://developers.llamaindex.ai/python/framework/use_cases/agents/) to Amazon Bedrock AgentCore Runtime with comprehensive observability and telemetry collection.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Overview
+## 개요
 
 Learn how to:
 - Create a LlamaIndex FunctionAgent with arithmetic tools
@@ -10,66 +10,15 @@ Learn how to:
 - Capture detailed telemetry data including agent workflows, tool calls, and LLM interactions
 - View traces and metrics in Amazon CloudWatch GenAI Observability dashboard
 
-## What You'll Build
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-A LlamaIndex arithmetic agent that can:
-- Perform addition and multiplication operations using function tools
-- Run on Amazon Bedrock AgentCore Runtime with built-in scalability
-- Automatically generate comprehensive observability data
-- Be monitored through CloudWatch dashboards with detailed trace information
+## 시작하기
 
-## Key Features
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-- **LlamaIndex Integration**: Uses LlamaIndex FunctionAgent with async workflows
-- **Automatic Observability**: Built-in telemetry collection with LlamaIndex OpenTelemetry instrumentation
-- **CloudWatch Integration**: View agent performance in GenAI Observability dashboard
+## 추가 리소스
 
-## Prerequisites
-
-- AWS account with appropriate permissions
-- Amazon Bedrock model access (Claude Haiku)
-- Python 3.10+
-- AWS credentials configured
-- Enable [transaction search](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Enable-TransactionSearch.html) on Amazon CloudWatch
-
-## Quick Start
-
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. Run the notebook:
-   ```bash
-   jupyter notebook runtime_with_llamaindex_and_bedrock_models.ipynb
-   ```
-
-3. Follow the step-by-step tutorial to deploy your agent with observability
-
-## Architecture
-
-The tutorial covers:
-- Local development and testing with LlamaIndex instrumentation
-- AgentCore Runtime deployment with automatic observability
-- CloudWatch dashboard access for trace analysis
-- Manual span creation for enhanced telemetry
-
-## Files
-
-- `runtime_with_llamaindex_and_bedrock_models.ipynb` - Main tutorial notebook
-- `requirements.txt` - Python dependencies including LlamaIndex observability
-- `README.md` - This documentation
-
-## Observability Features
-
-- **Agent Workflow Traces**: Complete execution flow of LlamaIndex FunctionAgent
-- **Tool Call Monitoring**: Track arithmetic function invocations
-- **LLM Interaction Traces**: Bedrock model calls with input/output tracking
-
-## Next Steps
-
-After completing this tutorial, you can:
-- Add more complex tools and workflows to your LlamaIndex agent
-- Implement multi-agent architectures with detailed observability
-- Set up custom alerts and monitoring based on trace data
-- Scale your agent for production workloads with full visibility
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

@@ -1,132 +1,132 @@
-# Infrastructure as Code Samples for Amazon Bedrock AgentCore
+# Amazon Bedrock AgentCore를 위한 코드형 인프라 샘플
 
-Deploy Amazon Bedrock AgentCore resources using CloudFormation templates, AWS CDK, or Terraform.
+CloudFormation 템플릿, AWS CDK 또는 Terraform을 사용하여 Amazon Bedrock AgentCore 리소스를 배포하세요.
 
-## Overview
+## 개요
 
-These Infrastructure as Code samples enable you to:
-- Deploy AgentCore resources consistently across environments
-- Automate infrastructure provisioning with Infrastructure as Code
-- Maintain version control of your infrastructure
-- Implement AWS best practices for security and monitoring
+이러한 코드형 인프라 샘플을 통해 다음을 수행할 수 있습니다:
+- 환경 전반에 걸쳐 AgentCore 리소스를 일관되게 배포
+- 코드형 인프라로 인프라 프로비저닝 자동화
+- 인프라의 버전 관리 유지
+- 보안 및 모니터링을 위한 AWS 모범 사례 구현
 
-Choose your preferred approach:
-- **[CloudFormation](./cloudformation/)** - YAML/JSON templates for declarative infrastructure
-- **[CDK](./cdk/)** - Python code for programmatic infrastructure
-- **[Terraform](./terraform/)** - HCL code for declarative infrastructure with state management
+선호하는 접근 방식을 선택하세요:
+- **[CloudFormation](./cloudformation/)** - 선언적 인프라를 위한 YAML/JSON 템플릿
+- **[CDK](./cdk/)** - 프로그래밍 방식 인프라를 위한 Python 코드
+- **[Terraform](./terraform/)** - 상태 관리를 통한 선언적 인프라를 위한 HCL 코드
 
-## Samples
+## 샘플
 
-### 1. Basic Agent Runtime
-Deploy a simple AgentCore Runtime with a basic Strands agent - no additional tools or memory.
+### 1. 기본 에이전트 런타임
+추가 도구나 메모리 없이 기본 Strands 에이전트로 간단한 AgentCore Runtime을 배포합니다.
 
-**What it deploys:**
-- AgentCore Runtime with simple agent
-- ECR Repository and automated Docker builds
-- IAM roles with least-privilege policies
+**배포 내용:**
+- 간단한 에이전트가 포함된 AgentCore Runtime
+- ECR 리포지토리 및 자동화된 Docker 빌드
+- 최소 권한 정책이 적용된 IAM 역할
 
-**Use case:** Learning AgentCore basics without complexity  
-**Deployment time:** ~5-15 minutes  
-**Estimated cost:** ~$50-100/month
+**사용 사례:** 복잡성 없이 AgentCore 기본 사항 학습  
+**배포 시간:** ~5-15분  
+**예상 비용:** 월 ~$50-100
 
-**Implementation:** [CloudFormation](./cloudformation/basic-runtime/) | [CDK](./cdk/basic-runtime/) | [Terraform](./terraform/basic-runtime/)
+**구현:** [CloudFormation](./cloudformation/basic-runtime/) | [CDK](./cdk/basic-runtime/) | [Terraform](./terraform/basic-runtime/)
 
-### 2. MCP Server on AgentCore Runtime
-Deploy a complete MCP (Model Context Protocol) server with automated Docker building and JWT authentication.
+### 2. AgentCore Runtime의 MCP 서버
+자동화된 Docker 빌드 및 JWT 인증을 갖춘 완전한 MCP(Model Context Protocol) 서버를 배포합니다.
 
-**What it deploys:**
-- AgentCore Runtime hosting MCP server
-- Amazon Cognito for JWT authentication
-- Automated ARM64 Docker builds
+**배포 내용:**
+- MCP 서버를 호스팅하는 AgentCore Runtime
+- JWT 인증을 위한 Amazon Cognito
+- 자동화된 ARM64 Docker 빌드
 
-**Sample MCP Tools:** `add_numbers`, `multiply_numbers`, `greet_user`  
-**Deployment time:** ~10-15 minutes  
-**Estimated cost:** ~$50-100/month
+**샘플 MCP 도구:** `add_numbers`, `multiply_numbers`, `greet_user`  
+**배포 시간:** ~10-15분  
+**예상 비용:** 월 ~$50-100
 
-**Implementation:** [CloudFormation](./cloudformation/mcp-server-agentcore-runtime/) | [CDK](./cdk/mcp-server-agentcore-runtime/) | [Terraform](./terraform/mcp-server-agentcore-runtime/)
+**구현:** [CloudFormation](./cloudformation/mcp-server-agentcore-runtime/) | [CDK](./cdk/mcp-server-agentcore-runtime/) | [Terraform](./terraform/mcp-server-agentcore-runtime/)
 
-### 3. Multi-Agent Runtime
-Deploy a multi-agent system where Agent1 (orchestrator) can invoke Agent2 (specialist) for complex tasks.
+### 3. 다중 에이전트 런타임
+Agent1(오케스트레이터)이 복잡한 작업을 위해 Agent2(전문가)를 호출할 수 있는 다중 에이전트 시스템을 배포합니다.
 
-**What it deploys:**
-- Two AgentCore Runtimes with agent-to-agent communication
-- IAM roles with agent-to-agent invocation permissions
-- Separate ECR repositories for each agent
+**배포 내용:**
+- 에이전트 간 통신이 가능한 두 개의 AgentCore Runtime
+- 에이전트 간 호출 권한이 있는 IAM 역할
+- 각 에이전트를 위한 별도의 ECR 리포지토리
 
-**Architecture:** Agent1 routes requests and delegates to Agent2 for detailed analysis  
-**Deployment time:** ~15-20 minutes  
-**Estimated cost:** ~$100-200/month
+**아키텍처:** Agent1이 요청을 라우팅하고 상세 분석을 위해 Agent2에 위임  
+**배포 시간:** ~15-20분  
+**예상 비용:** 월 ~$100-200
 
-**Implementation:** [CloudFormation](./cloudformation/multi-agent-runtime/) | [CDK](./cdk/multi-agent-runtime/) | [Terraform](./terraform/multi-agent-runtime/)
+**구현:** [CloudFormation](./cloudformation/multi-agent-runtime/) | [CDK](./cdk/multi-agent-runtime/) | [Terraform](./terraform/multi-agent-runtime/)
 
-### 4. End-to-End Weather Agent with Tools and Memory
-Deploy a complete weather-based activity planning agent with browser automation, code interpreter, and memory.
+### 4. 도구 및 메모리를 갖춘 엔드투엔드 날씨 에이전트
+브라우저 자동화, 코드 인터프리터 및 메모리를 갖춘 완전한 날씨 기반 활동 계획 에이전트를 배포합니다.
 
-**What it deploys:**
-- AgentCore Runtime with Strands agent
-- Browser Tool for web scraping weather data
-- Code Interpreter Tool for weather analysis
-- Memory for storing user preferences
-- S3 bucket for results storage
+**배포 내용:**
+- Strands 에이전트가 포함된 AgentCore Runtime
+- 날씨 데이터 웹 스크래핑을 위한 브라우저 도구
+- 날씨 분석을 위한 코드 인터프리터 도구
+- 사용자 선호도 저장을 위한 메모리
+- 결과 저장을 위한 S3 버킷
 
-**Features:** Scrapes weather.gov, analyzes conditions, stores preferences, generates recommendations  
-**Deployment time:** ~15-20 minutes  
-**Estimated cost:** ~$100-150/month
+**기능:** weather.gov 스크래핑, 조건 분석, 선호도 저장, 권장 사항 생성  
+**배포 시간:** ~15-20분  
+**예상 비용:** 월 ~$100-150
 
-**Implementation:** [CloudFormation](./cloudformation/end-to-end-weather-agent/) | [CDK](./cdk/end-to-end-weather-agent/) | [Terraform](./terraform/end-to-end-weather-agent/)
+**구현:** [CloudFormation](./cloudformation/end-to-end-weather-agent/) | [CDK](./cdk/end-to-end-weather-agent/) | [Terraform](./terraform/end-to-end-weather-agent/)
 
-## Prerequisites
+## 사전 요구 사항
 
-Before deploying any sample, ensure you have:
+샘플을 배포하기 전에 다음을 확인하세요:
 
-1. **AWS Account** with appropriate permissions
-2. **AWS CLI** installed and configured
-3. **Access to Amazon Bedrock AgentCore** (preview)
-4. **IAM Permissions** to create:
-   - CloudFormation stacks (for CloudFormation samples)
-   - IAM roles and policies
-   - ECR repositories
-   - Lambda functions
-   - AgentCore resources
-   - S3 buckets (for weather agent)
+1. 적절한 권한이 있는 **AWS 계정**
+2. **AWS CLI** 설치 및 구성
+3. **Amazon Bedrock AgentCore 액세스** (프리뷰)
+4. 다음을 생성할 수 있는 **IAM 권한**:
+   - CloudFormation 스택 (CloudFormation 샘플용)
+   - IAM 역할 및 정책
+   - ECR 리포지토리
+   - Lambda 함수
+   - AgentCore 리소스
+   - S3 버킷 (날씨 에이전트용)
 
-For CDK samples, also install:
+CDK 샘플의 경우 다음도 설치하세요:
 - Python 3.8+
-- AWS CDK v2.218.0 or later
+- AWS CDK v2.218.0 이상
 
-For Terraform samples, also install:
-- Terraform >= 1.6 (recommend [tfenv](https://github.com/tfutils/tfenv) for version management)
-- Note: `brew install terraform` provides v1.5.7 which is deprecated
+Terraform 샘플의 경우 다음도 설치하세요:
+- Terraform >= 1.6 (버전 관리를 위해 [tfenv](https://github.com/tfutils/tfenv) 권장)
+- 참고: `brew install terraform`은 더 이상 사용되지 않는 v1.5.7을 제공합니다
 
-## Repository Structure
+## 저장소 구조
 
 ```
 04-infrastructure-as-code/
-├── README.md                          # This file
-├── cloudformation/                    # CloudFormation samples
-│   ├── README.md                      # CloudFormation-specific guide
+├── README.md                          # 이 파일
+├── cloudformation/                    # CloudFormation 샘플
+│   ├── README.md                      # CloudFormation 전용 가이드
 │   ├── basic-runtime/
 │   ├── mcp-server-agentcore-runtime/
 │   ├── multi-agent-runtime/
 │   └── end-to-end-weather-agent/
-├── cdk/                              # CDK samples
-│   ├── README.md                     # CDK-specific guide
+├── cdk/                              # CDK 샘플
+│   ├── README.md                     # CDK 전용 가이드
 │   ├── basic-runtime/
 │   ├── mcp-server-agentcore-runtime/
 │   ├── multi-agent-runtime/
 │   └── end-to-end-weather-agent/
-└── terraform/                        # Terraform samples
-    ├── README.md                     # Terraform-specific guide
+└── terraform/                        # Terraform 샘플
+    ├── README.md                     # Terraform 전용 가이드
     ├── basic-runtime/
     ├── mcp-server-agentcore-runtime/
     ├── multi-agent-runtime/
     └── end-to-end-weather-agent/
 ```
 
-## Additional Resources
+## 추가 리소스
 
-- [Amazon Bedrock AgentCore Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agentcore.html)
-- [AWS CloudFormation Documentation](https://docs.aws.amazon.com/cloudformation/)
-- [AWS CDK Documentation](https://docs.aws.amazon.com/cdk/)
-- [Terraform Documentation](https://www.terraform.io/docs)
-- [Original Tutorials](../01-tutorials/)
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock/latest/userguide/agentcore.html)
+- [AWS CloudFormation 문서](https://docs.aws.amazon.com/cloudformation/)
+- [AWS CDK 문서](https://docs.aws.amazon.com/cdk/)
+- [Terraform 문서](https://www.terraform.io/docs)
+- [원본 튜토리얼](../01-tutorials/)

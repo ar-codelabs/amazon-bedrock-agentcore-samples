@@ -1,46 +1,45 @@
 # Amazon Bedrock AgentCore Runtime
 
-## Overview
-Amazon Bedrock AgentCore Runtime is a secure, serverless runtime designed for deploying and scaling AI agents and tools. 
-It supports any frameworks, models, and protocols, enabling developers to transform local prototypes into production-ready solutions with minimal code changes.
+## 개요
+Amazon Bedrock AgentCore Runtime은 AI 에이전트와 도구를 배포하고 확장하기 위해 설계된 안전한 서버리스 런타임입니다. 
+모든 프레임워크, 모델 및 프로토콜을 지원하여 개발자가 최소한의 코드 변경으로 로컬 프로토타입을 프로덕션 준비 솔루션으로 전환할 수 있습니다.
 
-Amazon BedrockAgentCore Python SDK provides a lightweight wrapper that helps you deploy your agent functions as HTTP services that are compatible with Amazon Bedrock. It handles all the HTTP server details so you can focus on your agent's core functionality.
+Amazon BedrockAgentCore Python SDK는 에이전트 함수를 Amazon Bedrock과 호환되는 HTTP 서비스로 배포하는 데 도움이 되는 경량 래퍼를 제공합니다. 모든 HTTP 서버 세부 사항을 처리하므로 에이전트의 핵심 기능에 집중할 수 있습니다.
 
-All you need to do is decorate your function with the `@app.entrypoint` decorator and use the `configure` and `launch` capabilities of the SDK to deploy your agent to AgentCore Runtime. Your application is then able to invoke this agent using the SDK or any of the AWS's developer tools such as boto3, AWS SDK for JavaScript or the AWS SDK for Java.
+`@app.entrypoint` 데코레이터로 함수를 장식하고 SDK의 `configure` 및 `launch` 기능을 사용하여 에이전트를 AgentCore Runtime에 배포하기만 하면 됩니다. 그러면 애플리케이션이 SDK 또는 boto3, AWS SDK for JavaScript 또는 AWS SDK for Java와 같은 AWS 개발자 도구를 사용하여 이 에이전트를 호출할 수 있습니다.
 
-![Runtime Overview](images/runtime_overview.png)
+![Runtime 개요](images/runtime_overview.png)
 
-## Key Features
+## 주요 기능
 
-### Framework and Model Flexibility
+### 프레임워크 및 모델 유연성
 
-- Deploy agents and tools from any framework (such as Strands Agents, LangChain, LangGraph, CrewAI) 
-- Using any model (in Amazon Bedrock or not)
+- 모든 프레임워크(Strands Agents, LangChain, LangGraph, CrewAI 등)에서 에이전트 및 도구 배포
+- 모든 모델 사용(Amazon Bedrock 내부 또는 외부)
 
-### Integration
+### 통합
 
-Amazon Bedrock AgentCore Runtime integrates with other Amazon Bedrock AgentCore capabilities through a unified SDK, including:
+Amazon Bedrock AgentCore Runtime은 통합 SDK를 통해 다른 Amazon Bedrock AgentCore 기능과 통합됩니다:
 
 - Amazon Bedrock AgentCore Memory
 - Amazon Bedrock AgentCore Gateway
 - Amazon Bedrock AgentCore Observability
 - Amazon Bedrock AgentCore Tools
 
-This integration aims to simplify the development process and provide a comprehensive platform for building, deploying, and managing AI agents.
+이 통합은 개발 프로세스를 단순화하고 AI 에이전트를 구축, 배포 및 관리하기 위한 포괄적인 플랫폼을 제공하는 것을 목표로 합니다.
 
-### Use Cases
+### 사용 사례
 
-The runtime is suitable for a wide range of applications, including:
+런타임은 다음을 포함한 광범위한 애플리케이션에 적합합니다:
 
-- Real-time, interactive AI agents
-- Long-running, complex AI workflows
-- Multi-modal AI processing (text, image, audio, video)
+- 실시간 대화형 AI 에이전트
+- 장기 실행 복잡한 AI 워크플로
+- 다중 모달 AI 처리(텍스트, 이미지, 오디오, 비디오)
 
-## Tutorials overview
+## 튜토리얼 개요
 
-In these tutorials we will cover the following functionality:
+이 튜토리얼에서는 다음 기능을 다룹니다:
 
-- [Hosting agents](01-hosting-agent)
-- [Hosting MCP Servers](02-hosting-MCP-server)
-- [Advanced Concepts](03-advanced-concepts)
-
+- [에이전트 호스팅](01-hosting-agent)
+- [MCP 서버 호스팅](02-hosting-MCP-server)
+- [고급 개념](03-advanced-concepts)

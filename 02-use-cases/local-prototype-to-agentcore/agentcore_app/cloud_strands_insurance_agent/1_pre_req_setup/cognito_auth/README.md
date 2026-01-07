@@ -1,69 +1,20 @@
 # Bedrock AgentCore Cognito Authentication Setup
 
-This directory contains scripts for setting up and managing AWS Cognito authentication for your Bedrock AgentCore application.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Quick Setup
+## 개요
 
-For a quick and easy setup, use the setup script:
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-```bash
-./setup_cognito.sh
-```
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-This script will:
-1. Check for AWS credentials and required tools (AWS CLI, jq)
-2. Prompt for required information with sensible defaults:
-   - AWS region
-   - User Pool name
-   - App Client name
-   - Test user credentials
-3. Create the Cognito User Pool and App Client
-4. Create a test user with the specified credentials
-5. Generate an access token for immediate use
-6. Save all configuration to easily accessible files
+## 시작하기
 
-## Configuration Files
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-After running the setup script, you'll have the following files:
+## 추가 리소스
 
-- `cognito_config.json` - Contains all configuration details and access token
-- `cognito_result.md` - A formatted summary of the setup for documentation
-
-## Refreshing Access Tokens
-
-Cognito access tokens expire after one hour by default. To refresh your token:
-
-```bash
-./refresh_token.sh
-```
-
-This will:
-1. Use the stored credentials in the config file
-2. Request a new access token from Cognito
-3. Update the configuration file automatically
-
-## Required Permissions
-
-To run these scripts, your AWS user must have the following permissions:
-
-- Amazon Cognito Identity Provider full access (`cognito-idp:*`) 
-- Or at minimum, permissions to:
-  - CreateUserPool
-  - CreateUserPoolClient
-  - AdminCreateUser
-  - AdminSetUserPassword
-  - InitiateAuth
-
-## Prerequisites
-
-- AWS CLI installed and configured with appropriate permissions
-- jq (JSON processor) installed for parsing outputs
-
-## Security Notes
-
-- The created user pool follows security best practices
-- Password policies can be adjusted in the setup script
-- For production use, consider additional security measures:
-  - Multi-factor authentication
-  - Custom password policies
-  - Token revocation strategies
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

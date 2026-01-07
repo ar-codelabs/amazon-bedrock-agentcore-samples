@@ -1,41 +1,20 @@
 # Fine-Grained Access Control with AgentCore Gateway Interceptors using JWT scopes.
 
-## Overview
-Modern enterprise agent systems often expose multiple tools—search, retrieval, order systems, analytics, document pipelines, and more. Not all users should be allowed to access every tool, and different roles (Analyst, Manager, Auditor, Contractor, etc.) may require different levels of access. Fine-Grained Access Control (FGAC) in AgentCore Gateway addresses this challenge through Gateway Interceptors, which are custom Lambda functions that process requests at two critical points: before reaching the target destination (Request Interceptor) and before returning the result to the calling agent (Response Interceptor).
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-![How does it work](images/fgac.png)
+## 개요
 
-### Implementing Fine-Grained Access Control for Invoking Tools
-The Gateway interceptor handles tool invocation control by utilizing JWT scopes to validate user permissions, implementing authorization checks before tool execution, and supporting both full target access and tool-specific permissions. When unauthorized access is attempted, the lambda blocks requests before they reach the target and returns structured MCP errors. This ensures secure access management across all tool interactions.
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-### Dynamic Tools Filtering
-For tool discovery and filtering, the Gateway interceptor manages access through two primary methods: List Tools and Semantic Search. When processing tools/list operations, the response interceptor filters the available tools based on user JWT scopes, ensuring that only authorized tools are returned to the requesting agent. Similarly, for semantic search operations, the response interceptor processes search results before returning them to agents, removing any unauthorized tools and applying the same permission logic as list operations. This approach maintains dynamic permission updates without caching and ensures consistent access control across all discovery methods.
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-This comprehensive approach to access control delivers several key benefits, including secure tool access based on user roles and permissions, dynamic filtering without permission state caching, consistent authorization across all tool discovery methods, simplified integration with existing authentication systems, and reduced security risks through early request validation. The implementation ensures that users can only discover and access tools appropriate for their role while maintaining a secure and scalable enterprise environment.
+## 시작하기
 
-### Tutorial Details
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
+## 추가 리소스
 
-| Information          | Details                                                                         |
-|:---------------------|:-----------------------------------------------------------------------         |
-| Tutorial type        | Interactive                                                                     |
-| AgentCore components | AgentCore Gateway, AgentCore Identity, AgentCore Runtime, Gateway Interceptors  |
-| Agentic Framework    | Strands Agents                                                                  |
-| Gateway Target Type  | MCP Server                                                                      |
-| Inbound Auth IdP     | Amazon Cognito, but can use others                                              |
-| Outbound Auth        | Amazon Cognito, but can use others                                              |
-| Tutorial components  | Fine-Grained Access Control through AgentCore Gateway Interceptors              |
-| Tutorial vertical    | Cross-vertical                                                                  |
-| Example complexity   | Easy-intermediate                                                               |
-| SDK used             | boto3                                                                           |
-
-## Tutorial Key Features
-
-* Fine-Grained Access Control with AgentCore Gateway Interceptors using custom scopes for key MCP actions.
-
-## Tutorial Overview
-
-In these tutorials we will cover the following functionality:
-
-- [Fine-Grained Access Control with AgentCore Gateway Interceptors using custom scopes](01-fine-grained-access-control-using-custom-scopes.ipynb).
-
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

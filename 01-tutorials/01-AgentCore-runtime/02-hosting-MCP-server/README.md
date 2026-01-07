@@ -1,6 +1,8 @@
 # Hosting MCP server on AgentCore Runtime
 
-## Overview
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
+
+## 개요
 
 In this session we will discuss how to host MCP tools on Amazon Bedrock AgentCore Runtime.
 
@@ -27,24 +29,15 @@ In this tutorial you will learn:
 * How to deploy your server to AWS
 * How to invoke your deployed server
 
-### Tutorial Details
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-| Information         | Details                                                   |
-|:--------------------|:----------------------------------------------------------|
-| Tutorial type       | Hosting Tools                                             |
-| Tool type           | MCP server                                                |
-| Tutorial components | Hosting tool on AgentCore Runtime. Creating an MCP server |
-| Tutorial vertical   | Cross-vertical                                            |
-| Example complexity  | Easy                                                      |
-| SDK used            | Amazon BedrockAgentCore Python SDK and MCP Client         |
+## 시작하기
 
-### Tutorial Architecture
-In this tutorial we will describe how to deploy an existing MCP server to AgentCore runtime. 
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-For demonstration purposes, we will use a very simple MCP server with 3 tools: `add_numbers`, `multiply_numbers` and `greet_users`
+## 추가 리소스
 
-![MCP architecture](images/hosting_mcp_server.png)
-
-### Tutorial Key Features
-
-* Hosting MCP Server
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

@@ -1,34 +1,20 @@
 # Integrate Dynatrace MCP Server with AgentCore Gateway
 
-## Overview
-This tutorial demonstrates how to integrate Dynatrace's MCP server with Amazon Bedrock AgentCore Gateway, providing centralized access to observability capabilities through a unified interface. The integration eliminates the need for custom client code and addresses key enterprise challenges in scaling observability tools across multiple teams.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-![Architecture](images/dynatrace-mcp-server-target.png)
+## 개요
 
-## Tutorial Details
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-| Information          | Details                                                   |
-|:---------------------|:----------------------------------------------------------|
-| Tutorial type        | Interactive                                               |
-| AgentCore components | AgentCore Gateway, AgentCore Identity                     |
-| Agentic Framework    | Strands Agents                                            |
-| Gateway Target type  | MCP server                                                |
-| Agent                | Strands                                                   |
-| Inbound Auth IdP     | Amazon Cognito                                            |
-| Outbound Auth        | OAuth2                                                    |
-| LLM model            | Anthropic Claude Sonnet 4                                 |
-| Tutorial components  | Creating AgentCore Gateway and Invoking AgentCore Gateway |
-| Tutorial vertical    | Observability                                             |
-| Example complexity   | Easy                                                      |
-| SDK used             | boto3                                                     |
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-## Key Features
+## 시작하기
 
-* Integrate Dynatrace MCP Server with AgentCore Gateway
-* Configure OAuth2 authentication for Dynatrace
-* Search and invoke observability tools through the Gateway
-* Use Strands agents to interact with Dynatrace capabilities
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-## Tutorial
+## 추가 리소스
 
-- [Integrate Dynatrace MCP Server into AgentCore Gateway](01-dynatrace-mcp-server-target.ipynb)
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

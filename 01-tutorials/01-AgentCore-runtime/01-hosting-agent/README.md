@@ -1,73 +1,73 @@
-# Hosting AI Agents on AgentCore Runtime
+# AgentCore Runtime에서 AI 에이전트 호스팅
 
-## Overview
+## 개요
 
-This tutorial demonstrates how to host AI agents on **Amazon Bedrock AgentCore Runtime** using the Amazon Bedrock AgentCore Python SDK. Learn to transform your agent code into a standardized HTTP service that integrates seamlessly with Amazon Bedrock's infrastructure.
+이 튜토리얼은 Amazon Bedrock AgentCore Python SDK를 사용하여 **Amazon Bedrock AgentCore Runtime**에서 AI 에이전트를 호스팅하는 방법을 보여줍니다. 에이전트 코드를 Amazon Bedrock의 인프라와 원활하게 통합되는 표준화된 HTTP 서비스로 변환하는 방법을 배웁니다.
 
-AgentCore Runtime is a **framework and model-agnostic** platform that can host agents built with any agentic framework (Strands Agents, LangGraph, CrewAI) and any LLM model (in Amazon Bedrock, OpenAI, etc.).
+AgentCore Runtime은 모든 에이전트 프레임워크(Strands Agents, LangGraph, CrewAI)와 모든 LLM 모델(Amazon Bedrock, OpenAI 등)로 구축된 에이전트를 호스팅할 수 있는 **프레임워크 및 모델 독립적** 플랫폼입니다.
 
-The Amazon Bedrock AgentCore Python SDK acts as a wrapper that:
+Amazon Bedrock AgentCore Python SDK는 다음과 같은 래퍼 역할을 합니다:
 
-- **Transforms** your agent code into AgentCore's standardized protocols
-- **Handles** HTTP and MCP server infrastructure automatically
-- **Lets you focus** on your agent's core functionality
-- **Supports** two protocol types:
-  - **HTTP Protocol**: Traditional request/response REST API endpoints
-  - **MCP Protocol**: Model Context Protocol for tools and agent servers
+- **변환**: 에이전트 코드를 AgentCore의 표준화된 프로토콜로 변환
+- **처리**: HTTP 및 MCP 서버 인프라를 자동으로 처리
+- **집중**: 에이전트의 핵심 기능에 집중할 수 있도록 지원
+- **지원**: 두 가지 프로토콜 유형 지원:
+  - **HTTP 프로토콜**: 기존 요청/응답 REST API 엔드포인트
+  - **MCP 프로토콜**: 도구 및 에이전트 서버를 위한 Model Context Protocol
 
-### Service Architecture
+### 서비스 아키텍처
 
-When hosting agents, the SDK automatically:
+에이전트를 호스팅할 때 SDK는 자동으로:
 
-- Hosts your agent on port `8080`
-- Provides two key endpoints:
-  - **`/invocations`**: Primary agent interaction (JSON input → JSON/SSE output)
-  - **`/ping`**: Health check for monitoring
+- 포트 `8080`에서 에이전트 호스팅
+- 두 가지 주요 엔드포인트 제공:
+  - **`/invocations`**: 기본 에이전트 상호 작용(JSON 입력 → JSON/SSE 출력)
+  - **`/ping`**: 모니터링을 위한 상태 확인
 
-![Hosting agent](images/hosting_agent_python_sdk.png)
+![에이전트 호스팅](images/hosting_agent_python_sdk.png)
 
-Once your agent is prepared for deployment on AgentCore Runtime, you can use the Amazon Bedrock AgentCore StarterKit to deploy it to deploy it to AgentCore Runtime.
+AgentCore Runtime에 배포할 에이전트가 준비되면 Amazon Bedrock AgentCore StarterKit을 사용하여 AgentCore Runtime에 배포할 수 있습니다.
 
-With the Starter Kit you can configure your agent deployment, launch it to create an Amazon ECR repository with the Agent's configuration and the AgentCore Runtime endpoint and invoke the created endpoint for validation.
+Starter Kit을 사용하면 에이전트 배포를 구성하고 시작하여 에이전트 구성 및 AgentCore Runtime 엔드포인트가 포함된 Amazon ECR 리포지토리를 생성하고 검증을 위해 생성된 엔드포인트를 호출할 수 있습니다.
 
 ![StarterKit](../images/runtime_overview.png)
 
-Once deployed, your AgentCore Runtime architecture in AWS looks as following:
+배포되면 AWS의 AgentCore Runtime 아키텍처는 다음과 같습니다:
 
 ![RuntimeArchitecture](../images/runtime_architecture.png)
 
-## Tutorial Examples
+## 튜토리얼 예제
 
-This tutorial includes three hands-on examples to get you started:
+이 튜토리얼에는 시작하는 데 도움이 되는 세 가지 실습 예제가 포함되어 있습니다:
 
-| Example                                                                | Framework      | Model          | Description                                |
+| 예제                                                                   | 프레임워크     | 모델           | 설명                                       |
 | ---------------------------------------------------------------------- | -------------- | -------------- | ------------------------------------------ |
-| **[01-strands-with-bedrock-model](01-strands-with-bedrock-model)**     | Strands Agents | Amazon Bedrock | Basic agent hosting with AWS native models |
-| **[02-langgraph-with-bedrock-model](02-langgraph-with-bedrock-model)** | LangGraph      | Amazon Bedrock | LangGraph agent workflows                  |
-| **[03-strands-with-openai-model](03-strands-with-openai-model)**       | Strands Agents | OpenAI         | Integration with external LLM providers    |
+| **[01-strands-with-bedrock-model](01-strands-with-bedrock-model)**     | Strands Agents | Amazon Bedrock | AWS 네이티브 모델을 사용한 기본 에이전트 호스팅 |
+| **[02-langgraph-with-bedrock-model](02-langgraph-with-bedrock-model)** | LangGraph      | Amazon Bedrock | LangGraph 에이전트 워크플로                  |
+| **[03-strands-with-openai-model](03-strands-with-openai-model)**       | Strands Agents | OpenAI         | 외부 LLM 공급자와의 통합                    |
 
-## Key Benefits
+## 주요 이점
 
-- **Framework Agnostic**: Works with any Python-based agent framework
-- **Model Flexible**: Support for LLMs in Amazon Bedrock, OpenAI, and other LLM providers
-- **Production Ready**: Built-in health checks and monitoring
-- **Easy Integration**: Minimal code changes required
-- **Scalable**: Designed for enterprise workloads
+- **프레임워크 독립적**: 모든 Python 기반 에이전트 프레임워크와 작동
+- **모델 유연성**: Amazon Bedrock, OpenAI 및 기타 LLM 공급자의 LLM 지원
+- **프로덕션 준비**: 내장 상태 확인 및 모니터링
+- **쉬운 통합**: 최소한의 코드 변경 필요
+- **확장 가능**: 엔터프라이즈 워크로드를 위해 설계됨
 
-## Getting Started
+## 시작하기
 
-Choose one of the tutorial examples above based on your preferred framework and model combination. Each example includes:
+선호하는 프레임워크 및 모델 조합에 따라 위의 튜토리얼 예제 중 하나를 선택하세요. 각 예제에는 다음이 포함됩니다:
 
-- Step-by-step setup instructions
-- Complete code samples
-- Testing guidelines
-- Best practices
+- 단계별 설정 지침
+- 완전한 코드 샘플
+- 테스트 가이드라인
+- 모범 사례
 
-## Next Steps
+## 다음 단계
 
-After completing the tutorials, you can:
+튜토리얼을 완료한 후 다음을 수행할 수 있습니다:
 
-- Extend these patterns to other frameworks and models
-- Deploy to production environments
-- Integrate with your existing applications
-- Scale your agent infrastructure
+- 이러한 패턴을 다른 프레임워크 및 모델로 확장
+- 프로덕션 환경에 배포
+- 기존 애플리케이션과 통합
+- 에이전트 인프라 확장

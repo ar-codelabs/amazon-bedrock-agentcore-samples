@@ -1,53 +1,20 @@
 # CloudFormation Samples
 
-Deploy Amazon Bedrock AgentCore resources using CloudFormation templates.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Prerequisites
+## 개요
 
-- AWS CLI installed and configured
-- CloudFormation permissions to create stacks and resources
-- Access to Amazon Bedrock AgentCore (preview)
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-## General Deployment Pattern
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-```bash
-# Deploy
-aws cloudformation create-stack \
-  --stack-name <stack-name> \
-  --template-body file://<template-file> \
-  --capabilities CAPABILITY_IAM \
-  --region <region>
+## 시작하기
 
-# Monitor
-aws cloudformation describe-stacks \
-  --stack-name <stack-name> \
-  --region <region>
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-# Cleanup
-aws cloudformation delete-stack \
-  --stack-name <stack-name> \
-  --region <region>
-```
+## 추가 리소스
 
-## Samples
-
-- **[mcp-server-agentcore-runtime/](./mcp-server-agentcore-runtime/)** - MCP Server with JWT authentication
-- **[basic-runtime/](./basic-runtime/)** - Simple agent deployment
-- **[multi-agent-runtime/](./multi-agent-runtime/)** - Multi-agent system
-- **[end-to-end-weather-agent/](./end-to-end-weather-agent/)** - Weather agent with tools and memory
-
-## Troubleshooting
-
-### Stack Creation Fails
-```bash
-aws cloudformation describe-stack-events \
-  --stack-name <stack-name> \
-  --region <region>
-```
-
-### CodeBuild Failures
-```bash
-aws codebuild batch-get-builds \
-  --ids <build-id> \
-  --region <region>
-```
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

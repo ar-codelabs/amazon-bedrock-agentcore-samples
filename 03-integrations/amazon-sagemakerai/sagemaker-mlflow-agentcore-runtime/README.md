@@ -1,23 +1,20 @@
-
-
 # SageMaker Managed MLflow Observability for Strands Agents on Amazon Bedrock AgentCore
-This example provides step-by-step instructions, sample code, and deployment jupyter notebook to operationalize Strands Agents in Amazon Bedrock's AgentCore Runtime with Amazon SageMaker managed MLflow for observability. With this you will be able to observe Real-time agent interactions and tool invocations are recorded in MLflow for auditing and analytics of your agentic applications deployed in Amazon Bedrock AgentCore Runtime.
 
-![image](./images/sagemaker-mlflow-agentCore.png)
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Features
-- Deployment of tool-augmented financial analysis agents via Amazon Bedrock AgentCore Runtime
-- AgentCore Runtime integration with SageMaker managed MLflow
-- Automated tracing and experiment tracking using SageMaker managed MLflow (MLflow 3.4.0+ required). Sample output shown below.
-- Example: Streaming real-time financial agent responses for investment advice
+## 개요
 
-![image](./images/sagemaker-mlflow-output.png)
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-## Sample Code Repository [sample-aiops-on-amazon-sagemakerai](https://github.com/aws-samples/sample-aiops-on-amazon-sagemakerai/tree/main/examples/sagemaker-mlflow-agentcore-runtime)
-You can find the code samples and the accompanying jupyter notebook in the respository: [sample-aiops-on-amazon-sagemakerai](https://github.com/aws-samples/sample-aiops-on-amazon-sagemakerai/tree/main/examples/sagemaker-mlflow-agentcore-runtime)
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-# License
-This library is licensed under the MIT-0 License. See the LICENSE file.
----
+## 시작하기
 
-*This solution demonstrates modern automation architecture patterns for AI/ML workloads on AWS, showcasing how to build scalable Agentic workloads.*
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
+
+## 추가 리소스
+
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

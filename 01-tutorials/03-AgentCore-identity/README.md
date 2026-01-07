@@ -1,100 +1,99 @@
 # Amazon Bedrock AgentCore Identity
 
-## Overview
+## 개요
 
-Amazon Bedrock AgentCore Identity is a comprehensive identity and credential management service designed specifically for AI agents and automated workloads. It provides secure authentication, authorization, and credential management capabilities that enable users to invoke agents, and agents to access external resources and services on behalf of users while maintaining strict security controls and audit trails.
+Amazon Bedrock AgentCore Identity는 AI 에이전트 및 자동화된 워크로드를 위해 특별히 설계된 포괄적인 ID 및 자격 증명 관리 서비스입니다. 사용자가 에이전트를 호출하고 에이전트가 엄격한 보안 제어 및 감사 추적을 유지하면서 사용자를 대신하여 외부 리소스 및 서비스에 액세스할 수 있도록 하는 안전한 인증, 권한 부여 및 자격 증명 관리 기능을 제공합니다.
 
-AgentCore Identity addresses a fundamental challenge in AI agent deployment: enabling agents to securely access user-specific data across multiple services without compromising security or user experience. The service operates on the principle of **delegation rather than impersonation**, where agents authenticate as themselves while carrying verifiable user context.
+AgentCore Identity는 AI 에이전트 배포의 근본적인 과제를 해결합니다: 보안이나 사용자 경험을 손상시키지 않으면서 에이전트가 여러 서비스에서 사용자별 데이터에 안전하게 액세스할 수 있도록 하는 것입니다. 이 서비스는 **가장이 아닌 위임** 원칙에 따라 작동하며, 에이전트는 검증 가능한 사용자 컨텍스트를 전달하면서 자신으로 인증합니다.
 
-## Key Features
+## 주요 기능
 
-- **Inbound Authentication**: Validate access for users and applications calling agents or tools
-- **Outbound Authentication**: Secure access from agents to external services on behalf of users
-- **OAuth Integration**: Support for 2-legged and 3-legged OAuth flows
-- **AWS IAM Integration**: Native integration with AWS identity and access management
-- **Zero Trust Security**: Every request is validated regardless of source or previous trust relationships
-- **Cross-Platform Support**: Works across AWS, other cloud providers, and on-premise environments
+- **인바운드 인증**: 에이전트 또는 도구를 호출하는 사용자 및 애플리케이션에 대한 액세스 검증
+- **아웃바운드 인증**: 에이전트에서 사용자를 대신하여 외부 서비스에 대한 안전한 액세스
+- **OAuth 통합**: 2-legged 및 3-legged OAuth 흐름 지원
+- **AWS IAM 통합**: AWS ID 및 액세스 관리와의 네이티브 통합
+- **제로 트러스트 보안**: 소스 또는 이전 신뢰 관계에 관계없이 모든 요청이 검증됨
+- **크로스 플랫폼 지원**: AWS, 다른 클라우드 공급자 및 온프레미스 환경에서 작동
 
-## Authentication Types
+## 인증 유형
 
-AgentCore Identity supports two primary authentication patterns:
+AgentCore Identity는 두 가지 주요 인증 패턴을 지원합니다:
 
-### Inbound Auth
-Validates access for users and applications calling agents or tools in AgentCore Runtime or Gateway targets. Supports:
-- **AWS IAM**: Direct IAM-based access control
-- **OAuth**: Token-based authentication without requiring IAM permissions for end users
+### 인바운드 인증
+AgentCore Runtime 또는 Gateway 대상에서 에이전트 또는 도구를 호출하는 사용자 및 애플리케이션에 대한 액세스를 검증합니다. 지원:
+- **AWS IAM**: 직접 IAM 기반 액세스 제어
+- **OAuth**: 최종 사용자에게 IAM 권한이 필요하지 않은 토큰 기반 인증
 
-### Outbound Auth
-Enables agents to access AWS services and external resources on behalf of users:
-- **AWS Resources**: Uses IAM execution roles for AWS service access
-- **External Services**: OAuth 2-legged (client credentials) and 3-legged (authorization code) flows
+### 아웃바운드 인증
+에이전트가 사용자를 대신하여 AWS 서비스 및 외부 리소스에 액세스할 수 있도록 합니다:
+- **AWS 리소스**: AWS 서비스 액세스를 위해 IAM 실행 역할 사용
+- **외부 서비스**: OAuth 2-legged(클라이언트 자격 증명) 및 3-legged(권한 부여 코드) 흐름
 
+![인증 기본 사항](images/auth_basics3.png)
 
-![Authentication Basics](images/auth_basics3.png)
+## 작동 방식
 
-## How It Works
+AgentCore Identity는 여러 신뢰 도메인에서 인증 및 권한 부여를 조정하는 포괄적인 워크플로를 구현합니다:
 
-AgentCore Identity implements a comprehensive workflow that orchestrates authentication and authorization across multiple trust domains:
+1. **사용자 인증**: 사용자는 기존 ID 공급자(Cognito, Auth0 등)를 통해 인증합니다
+2. **에이전트 권한 부여**: 애플리케이션은 사용자 토큰으로 에이전트 액세스를 요청합니다
+3. **토큰 교환**: AgentCore Identity는 사용자 토큰을 검증하고 워크로드 액세스 토큰을 발급합니다
+4. **리소스 액세스**: 에이전트는 워크로드 토큰을 사용하여 AWS 및 타사 리소스에 액세스합니다
+5. **위임 및 감사**: 모든 작업은 사용자 컨텍스트 및 감사 추적을 유지합니다
 
-1. **User Authentication**: Users authenticate through existing identity providers (Cognito, Auth0, etc.)
-2. **Agent Authorization**: Applications request agent access with user tokens
-3. **Token Exchange**: AgentCore Identity validates user tokens and issues workload access tokens
-4. **Resource Access**: Agents use workload tokens to access AWS and third-party resources
-5. **Delegation & Audit**: All actions maintain user context and audit trails
+![작동 방식](images/how_it_works.png)
 
-![How It Works](images/how_it_works.png)
+자세한 기술 정보는 [AgentCore Identity 작동 방식](02-how_it_works.md)을 참조하세요.
 
-For detailed technical information, see [How AgentCore Identity Works](02-how_it_works.md).
+## 튜토리얼 예제
 
-## Tutorial Examples
+이 튜토리얼에는 다양한 인증 시나리오를 보여주는 4가지 실습 예제가 포함되어 있습니다:
 
-This tutorial includes four hands-on examples demonstrating different authentication scenarios:
-
-| Example | Type | Description |
+| 예제 | 유형 | 설명 |
 |---------|------|-------------|
-| **[Inbound Auth Example](03-Inbound%20Auth%20example)** | Inbound | User authentication with Strands agents and Bedrock models |
-| **[Outbound Auth Example](04-Outbound%20Auth%20example)** | Outbound | Agent access to external services with Strands and OpenAI |
-| **[3-Legged OAuth](05-Outbound_Auth_3lo)** | Outbound | User-delegated access with Cognito and 3-legged OAuth flow with Google |
-| **[GitHub Integration](06-Outbound_Auth_Github)** | Outbound | GitHub API access using 3-legged OAuth authentication |
+| **[인바운드 인증 예제](03-Inbound%20Auth%20example)** | 인바운드 | Strands 에이전트 및 Bedrock 모델을 사용한 사용자 인증 |
+| **[아웃바운드 인증 예제](04-Outbound%20Auth%20example)** | 아웃바운드 | Strands 및 OpenAI를 사용한 외부 서비스에 대한 에이전트 액세스 |
+| **[3-Legged OAuth](05-Outbound_Auth_3lo)** | 아웃바운드 | Cognito 및 Google과의 3-legged OAuth 흐름을 사용한 사용자 위임 액세스 |
+| **[GitHub 통합](06-Outbound_Auth_Github)** | 아웃바운드 | 3-legged OAuth 인증을 사용한 GitHub API 액세스 |
 
-Each example includes:
-- Complete Jupyter notebook walkthrough
-- Step-by-step setup instructions
-- Code samples and explanations
-- Best practices and security considerations
+각 예제에는 다음이 포함됩니다:
+- 완전한 Jupyter 노트북 안내
+- 단계별 설정 지침
+- 코드 샘플 및 설명
+- 모범 사례 및 보안 고려 사항
 
-## Getting Started
+## 시작하기
 
-1. **Read the Introduction**: Start with [Getting Started](01-getting_started.md) to understand AgentCore Identity concepts
-2. **Understand the Workflow**: Review [How It Works](02-how_it_works.md) for technical details
-3. **Choose an Example**: Select a tutorial example based on your authentication needs:
-   - For user authentication to agents: Start with **Inbound Auth Example**
-   - For agent access to external services: Try **Outbound Auth Example**
-   - For user-delegated access patterns: Explore **3-Legged OAuth** or **GitHub Integration**
+1. **소개 읽기**: AgentCore Identity 개념을 이해하려면 [시작하기](01-getting_started.md)부터 시작하세요
+2. **워크플로 이해**: 기술 세부 정보는 [작동 방식](02-how_it_works.md)을 검토하세요
+3. **예제 선택**: 인증 요구 사항에 따라 튜토리얼 예제를 선택하세요:
+   - 에이전트에 대한 사용자 인증: **인바운드 인증 예제**로 시작
+   - 외부 서비스에 대한 에이전트 액세스: **아웃바운드 인증 예제** 시도
+   - 사용자 위임 액세스 패턴: **3-Legged OAuth** 또는 **GitHub 통합** 탐색
 
-## Key Benefits
+## 주요 이점
 
-- **Enhanced Security**: Zero trust authentication with fine-grained access controls
-- **User Experience**: Seamless access without repeated authentication prompts
-- **Audit & Compliance**: Complete audit trails for all agent actions
-- **Framework Agnostic**: Works with any agent framework (Strands, LangGraph, CrewAI, etc.)
-- **Scalable**: Enterprise-ready with support for multiple identity providers
-- **Standards-Based**: Built on OAuth 2.0, OIDC, and industry security standards
+- **향상된 보안**: 세분화된 액세스 제어를 통한 제로 트러스트 인증
+- **사용자 경험**: 반복적인 인증 프롬프트 없이 원활한 액세스
+- **감사 및 규정 준수**: 모든 에이전트 작업에 대한 완전한 감사 추적
+- **프레임워크 독립적**: 모든 에이전트 프레임워크(Strands, LangGraph, CrewAI 등)와 작동
+- **확장 가능**: 여러 ID 공급자를 지원하는 엔터프라이즈 준비
+- **표준 기반**: OAuth 2.0, OIDC 및 업계 보안 표준을 기반으로 구축
 
-## Architecture Integration
+## 아키텍처 통합
 
-AgentCore Identity integrates seamlessly with other AgentCore components:
+AgentCore Identity는 다른 AgentCore 구성 요소와 원활하게 통합됩니다:
 
-- **AgentCore Runtime**: Provides authentication for hosted agents
-- **AgentCore Gateway**: Secures access to tools and external APIs  
-- **AgentCore Memory**: Maintains secure access to user-specific memory stores
-- **Third-Party Services**: Enables secure integration with external APIs and services
+- **AgentCore Runtime**: 호스팅된 에이전트에 대한 인증 제공
+- **AgentCore Gateway**: 도구 및 외부 API에 대한 액세스 보안
+- **AgentCore Memory**: 사용자별 메모리 저장소에 대한 안전한 액세스 유지
+- **타사 서비스**: 외부 API 및 서비스와의 안전한 통합 가능
 
-## Next Steps
+## 다음 단계
 
-After completing the tutorials, you can:
-- Integrate AgentCore Identity with your existing identity infrastructure
-- Configure custom OAuth providers and scopes
-- Implement advanced security policies and access controls
-- Deploy production-ready agent authentication workflows
-- Scale your secure agent infrastructure across multiple services and platforms
+튜토리얼을 완료한 후 다음을 수행할 수 있습니다:
+- AgentCore Identity를 기존 ID 인프라와 통합
+- 사용자 정의 OAuth 공급자 및 범위 구성
+- 고급 보안 정책 및 액세스 제어 구현
+- 프로덕션 준비 에이전트 인증 워크플로 배포
+- 여러 서비스 및 플랫폼에서 안전한 에이전트 인프라 확장

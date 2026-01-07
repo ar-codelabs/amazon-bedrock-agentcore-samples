@@ -1,40 +1,23 @@
 # Hosting Strands Agents with OpenAI models in Amazon Bedrock AgentCore Runtime
 
-## Overview
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
+
+## 개요
 
 In this tutorial we will learn how to host your existing agent, using Amazon Bedrock AgentCore Runtime. 
 
 We will focus on a Strands Agents with OpenAI model example. For Strands Agents with Amazon Bedrock model check [here](../01-strands-with-bedrock-model) and 
 for LangGraph with Amazon Bedrock model check [here](../02-langgraph-with-bedrock-model)
 
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-### Tutorial details
+## 시작하기
 
-| Information         | Details                                                                  |
-|:--------------------|:-------------------------------------------------------------------------|
-| Tutorial type       | Conversational                                                           |
-| Agent type          | Single                                                                   |
-| Agentic Framework   | Strands Agents                                                           |
-| LLM model           | GPT 4.1 mini                                                             |
-| Tutorial components | Hosting agent on AgentCore Runtime. Using Strands Agent and OpenAI Model |
-| Tutorial vertical   | Cross-vertical                                                           |
-| Example complexity  | Easy                                                                     |
-| SDK used            | Amazon BedrockAgentCore Python SDK and boto3                             |
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-### Tutorial Architecture
+## 추가 리소스
 
-In this tutorial we will describe how to deploy an existing agent to AgentCore runtime. 
-
-For demonstration purposes, we will  use a Strands Agent using Amazon Bedrock models
-
-In our example we will use a very simple agent with two tools: `get_weather` and `get_time`. 
-
-<div style="text-align:left">
-    <img src="images/architecture_runtime.png" width="100%"/>
-</div>
-
-### Tutorial key Features
-
-* Hosting Agents on Amazon Bedrock AgentCore Runtime
-* Using OpenAI models
-* Using Strands Agents
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

@@ -1,69 +1,20 @@
 # Visa Payment Integration Documentation
 
-This directory contains comprehensive documentation for integrating Visa's tokenization and passkey authentication into your AI agent application.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Documentation Overview
+## 개요
 
-### 📖 [Visa Payment Integration Guide](visa-payment-integration-guide.md)
-**Start here** - A complete walkthrough of the Visa payment integration process, covering:
-- Architecture overview (VTS, VIC, Auth iFrame)
-- Prerequisites and credentials
-- Phase-by-phase implementation steps
-- Data storage considerations
-- Security best practices
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-### 🔄 [Travel Booking Flow Diagram](travel-booking-sequence-diagram.md)
-Visual sequence diagram showing the complete payment flow in a **travel booking context**:
-- User books a flight
-- Card tokenization (one-time setup)
-- Passkey creation (one-time setup)
-- Payment authentication and completion
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-### 🛍️ [Shopping Flow Diagram](shopping-sequence-diagram.md)
-Visual sequence diagram showing the complete payment flow in a **shopping context**:
-- User purchases products
-- Card tokenization (one-time setup)
-- Passkey creation (one-time setup)
-- Payment authentication and completion
+## 시작하기
 
-## Quick Navigation
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-### For First-Time Implementation
-1. Read the [Visa Payment Integration Guide](visa-payment-integration-guide.md) to understand the overall flow
-2. Review the [Travel Booking Diagram](travel-booking-sequence-diagram.md) or [Shopping Diagram](shopping-sequence-diagram.md) to visualize the sequence
-3. Refer back to the Visa Payment Integration Guide for detailed step-by-step instructions
+## 추가 리소스
 
-### For Understanding Specific Flows
-- **Travel/Booking Use Case** → [Travel Booking Diagram](travel-booking-sequence-diagram.md)
-- **E-commerce/Shopping Use Case** → [Shopping Diagram](shopping-sequence-diagram.md)
-
-### For Technical Details
-- **API Endpoints and Payloads** → [Visa Payment Integration Guide](visa-payment-integration-guide.md)
-- **Data Storage** → [Visa Payment Integration Guide - Data Storage Considerations](visa-payment-integration-guide.md#data-storage-considerations)
-- **Security** → [Visa Payment Integration Guide - Security Best Practices](visa-payment-integration-guide.md#security-best-practices)
-
-## Key Concepts
-
-### The Three Visa Services
-- **VTS (Visa Token Service)** - Converts card numbers to secure tokens and manages device binding
-- **VIC (Visa Intelligent Commerce)** - Orchestrates payment transactions and generates cryptograms
-- **Auth iFrame** - Provides secure passkey creation and authentication interface
-
-### The Two Phases
-1. **One-Time Setup** (Phases 2-3)
-   - Card tokenization
-   - Passkey creation and device binding
-   
-2. **Per-Transaction** (Phases 4-5)
-   - Passkey authentication
-   - Payment credential generation
-   - Transaction completion
-
-## Contributing
-
-When updating this documentation:
-- Verify all information against the source API documentation
-- Avoid adding speculative security explanations
-- Keep implementation suggestions (not prescriptive requirements)
-- Update both diagrams if the flow changes
-- Maintain consistency across all three documents
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

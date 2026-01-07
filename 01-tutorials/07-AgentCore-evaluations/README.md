@@ -1,43 +1,42 @@
-# Overview
+# 개요
 
-Amazon Bedrock AgentCore Evaluations helps you optimize your agent's quality based on real-world interactions.
+Amazon Bedrock AgentCore Evaluations는 실제 상호 작용을 기반으로 에이전트의 품질을 최적화하는 데 도움을 줍니다.
 
-## Key Features
+## 주요 기능
 
-While AgentCore Observability provides operational insights into agent health, AgentCore Evaluations focuses on agent decision quality and performance outcomes.
+AgentCore Observability가 에이전트 상태에 대한 운영 통찰력을 제공하는 반면, AgentCore Evaluations는 에이전트 의사 결정 품질 및 성능 결과에 중점을 둡니다.
 
-It provides built-in and custom evaluators with both on-demand and online evaluation capabilities.
+온디맨드 및 온라인 평가 기능과 함께 내장 및 사용자 정의 평가자를 제공합니다.
 
-### Built-in and Custom Evaluators
+### 내장 및 사용자 정의 평가자
 
-AgentCore Evaluations offers 13 built-in evaluators for critical dimensions like correctness, helpfulness, and safety, plus the ability to create custom evaluators for business-specific requirements.
+AgentCore Evaluations는 정확성, 유용성 및 안전성과 같은 중요한 차원에 대한 13개의 내장 평가자와 비즈니스별 요구 사항에 대한 사용자 정의 평가자를 생성할 수 있는 기능을 제공합니다.
 
-Test your agents during development and deployment using the on-demand evaluations API, or monitor production agents with the online evaluations API.
+온디맨드 평가 API를 사용하여 개발 및 배포 중에 에이전트를 테스트하거나 온라인 평가 API를 사용하여 프로덕션 에이전트를 모니터링하세요.
 
-### On-demand Evaluations
+### 온디맨드 평가
 
-Run synchronous, on-demand evaluations using built-in and custom metrics on individual traces.
+개별 추적에 대해 내장 및 사용자 정의 메트릭을 사용하여 동기식 온디맨드 평가를 실행합니다.
 
-The system uses OpenTelemetry (OTEL) traces to perform scoring and returns a response that includes:
-- Score value
-- Explanation for the score
-- Token usage
+시스템은 OpenTelemetry(OTEL) 추적을 사용하여 점수를 매기고 다음을 포함하는 응답을 반환합니다:
+- 점수 값
+- 점수에 대한 설명
+- 토큰 사용량
 
-Online Evaluations
+### 온라인 평가
 
-In production, you need continuous performance monitoring across all interactions without manually evaluating each trace. A statistical sample is often sufficient for generating meaningful performance metrics.
+프로덕션에서는 각 추적을 수동으로 평가하지 않고 모든 상호 작용에 대한 지속적인 성능 모니터링이 필요합니다. 통계적 샘플은 의미 있는 성능 메트릭을 생성하는 데 충분한 경우가 많습니다.
 
-AgentCore Evaluations' online capabilities enable automatic sampling and evaluation:
+AgentCore Evaluations의 온라인 기능은 자동 샘플링 및 평가를 가능하게 합니다:
 
-- Define your sample size and trace selection criteria
-- Choose your evaluation metrics (built-in or custom)
-- AgentCore Evaluations handles the rest, generating the performance data you need to monitor your agent at scale
+- 샘플 크기 및 추적 선택 기준 정의
+- 평가 메트릭 선택(내장 또는 사용자 정의)
+- AgentCore Evaluations가 나머지를 처리하여 대규모로 에이전트를 모니터링하는 데 필요한 성능 데이터를 생성합니다
 
-## Tutorials overview
+## 튜토리얼 개요
 
-In these tutorials we will cover the following functionality:
-- [Pre-requisites](00-prereqs): Creating a sample agent to use during the evaluation tutorials
-- [Create a custom evaluator](01-creating-custom-evaluators): Learn about built-in and custom metrics, and create a custom metric for evaluating your agents
-- [Using on-demand  and online evaluations](02-running-evaluations): Learn how to use on-demand and online evaluations to build, optimize, and monitor your agent at scale
-- [Advanced](03-advanced): Explore advanced capabilities including using the boto3 SDK to query Amazon CloudWatch logs for on-demand evaluation, and creating local dashboards to visualize experiments with different agent configuration
-
+이 튜토리얼에서는 다음 기능을 다룹니다:
+- [사전 요구 사항](00-prereqs): 평가 튜토리얼 중에 사용할 샘플 에이전트 생성
+- [사용자 정의 평가자 생성](01-creating-custom-evaluators): 내장 및 사용자 정의 메트릭에 대해 알아보고 에이전트를 평가하기 위한 사용자 정의 메트릭 생성
+- [온디맨드 및 온라인 평가 사용](02-running-evaluations): 온디맨드 및 온라인 평가를 사용하여 대규모로 에이전트를 구축, 최적화 및 모니터링하는 방법 알아보기
+- [고급](03-advanced): boto3 SDK를 사용하여 온디맨드 평가를 위해 Amazon CloudWatch 로그를 쿼리하고 다양한 에이전트 구성으로 실험을 시각화하기 위한 로컬 대시보드를 생성하는 것을 포함한 고급 기능 탐색

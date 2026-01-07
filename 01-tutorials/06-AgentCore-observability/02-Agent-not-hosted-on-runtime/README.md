@@ -1,50 +1,20 @@
 # Self-Hosted Agent Observability using AgentCore
 
-This section demonstrates AgentCore Observability for popular open-source agent frameworks **not** hosted on Amazon Bedrock AgentCore Runtime. Learn to add comprehensive observability to your existing agents using OpenTelemetry and Amazon CloudWatch.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Available Frameworks
+## 개요
 
-### CrewAI
-- **Notebook**: `CrewAI_Observability.ipynb`
-- **Description**: Autonomous AI agents working in teams
-- **Features**: Multi-agent collaboration with custom instrumentation
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-### LangGraph
-- **Notebook**: `Langgraph_Observability.ipynb`
-- **Description**: Stateful, multi-actor LLM applications
-- **Features**: Complex reasoning systems with trace visualization
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-### LlamaIndex
-- **Notebook**: `LlamaIndex_Observability.ipynb`
-- **Description**: LLM-powered agents over data
-- **Features**: Function agents with session tracking
-- **Additional**: Detailed README with architecture diagrams
+## 시작하기
 
-### Strands Agents
-- **Notebook**: `Strands_Observability.ipynb`
-- **Description**: Model-driven agentic development
-- **Features**: Complex workflow agents with custom spans
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-## Getting Started
+## 추가 리소스
 
-1. Choose your framework directory
-2. Install requirements: `pip install -r requirements.txt`
-3. Configure AWS credentials
-4. Copy `.env.example` to `.env` and update variables
-5. Enable CloudWatch Transaction Search
-6. Run the Jupyter notebook
-
-
-## Prerequisites
-
-- AWS account with Bedrock and CloudWatch access with the right permissions
-- Python 3.10+
-- AWS CloudWatch Transaction Search enabled
-- Framework-specific dependencies
-
-## Cleanup
-
-After completing examples:
-1. Delete CloudWatch log groups
-2. Remove any created AWS resources
-3. Clean up local environment files
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

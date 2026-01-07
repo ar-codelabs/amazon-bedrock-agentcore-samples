@@ -1,69 +1,20 @@
 # Visa Lambda Stack
 
-AWS Lambda proxy for Visa Payment API integration.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Overview
+## 개요
 
 This stack deploys a Lambda function that proxies all Visa Payment API calls from the frontend. It replaces the need to run the local Flask server (`local-visa-server`) during development and production.
 
-## Architecture
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-```
-Frontend → API Gateway → Lambda → Visa API
-                          ↓
-                    Secrets Manager (Visa credentials)
-```
+## 시작하기
 
-## Quick Start
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-### Deploy
+## 추가 리소스
 
-From the project root:
-
-```bash
-npm run deploy:visa-lambda
-```
-
-### Update Frontend
-
-After deployment, copy the API Gateway URL from the output and update `web-ui/.env.local`:
-
-```bash
-VITE_VISA_PROXY_URL=https://YOUR_API_GATEWAY_URL/
-VITE_VISA_MOCK_MODE=false
-```
-
-### Test
-
-```bash
-npm run dev
-```
-
-## Stack Resources
-
-- **Lambda Function**: Python 3.11 container with Flask + Mangum
-- **API Gateway**: REST API with `/api/visa/*` proxy routes
-- **IAM Role**: Secrets Manager access for Visa credentials
-- **CloudWatch Logs**: Automatic logging
-
-## Monitoring
-
-```bash
-# View Lambda logs
-aws logs tail /aws/lambda/VisaProxyLambda --follow
-```
-
-## Cost
-
-- Development: ~$4/month
-- Production: ~$37/month
-
-## Cleanup
-
-```bash
-npm run clean:visa-lambda
-```
-
-## Documentation
-
-See full deployment guide in this README and `../../docs/VISA_LOCAL_SETUP.md`
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

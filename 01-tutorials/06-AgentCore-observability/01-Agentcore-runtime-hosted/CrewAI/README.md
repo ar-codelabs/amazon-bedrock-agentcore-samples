@@ -1,44 +1,20 @@
 # CrewAI Agent with Amazon Bedrock AgentCore Runtime and Observability
 
-This tutorial demonstrates how to deploy a [CrewAI](https://www.crewai.com/) travel agent to Amazon Bedrock AgentCore Runtime with observability through Amazon CloudWatch.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Overview
+## 개요
 
 Learn to host a CrewAI agent using Amazon Bedrock models with comprehensive observability with AWS OpenTelemetry instrumentation and Amazon CloudWatch monitoring.
 
-## Prerequisites
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-* Python 3.10+
-* AWS credentials configured with appropriate permissions
-* Amazon Bedrock AgentCore SDK
-* CrewAI framework
-* Amazon CloudWatch access
-* Enable [transaction search](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Enable-TransactionSearch.html) on Amazon CloudWatch
+## 시작하기
 
-## Getting Started
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 추가 리소스
 
-2. Open the Jupyter notebook: `runtime-with-crewai-and-bedrock-models.ipynb`
-
-3. Follow the tutorial to:
-   - Create and test a CrewAI agent locally
-   - Deploy the agent to AgentCore Runtime
-   - Enable observability with OpenTelemetry
-   - Monitor performance on CloudWatch
-
-## Key Features
-
-* CrewAI travel agent with web search capabilities
-* Amazon Bedrock models (Anthropic Claude Haiku 4.5)
-* AgentCore Runtime hosting
-* CloudWatch observability and tracing
-
-## Cleanup
-
-After completing the tutorial:
-1. Remove AgentCore Runtime deployments
-2. Clean up ECR repositories
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

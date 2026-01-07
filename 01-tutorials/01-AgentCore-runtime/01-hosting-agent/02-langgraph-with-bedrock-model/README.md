@@ -1,39 +1,23 @@
 # Hosting LangGraph agent with Amazon Bedrock models in Amazon Bedrock AgentCore Runtime
 
-## Overview
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
+
+## 개요
 
 In this tutorial we will learn how to host your existing agent, using Amazon Bedrock AgentCore Runtime. 
 
 We will focus on a LangGraph with Amazon Bedrock model example. For Strands Agents with Amazon Bedrock model check [here](../01-strands-with-bedrock-model)
 and for a Strands Agents with an OpenAI model check [here](../03-strands-with-openai-model).
 
-### Tutorial Details
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-| Information         | Details                                                                      |
-|:--------------------|:-----------------------------------------------------------------------------|
-| Tutorial type       | Conversational                                                               |
-| Agent type          | Single                                                                       |
-| Agentic Framework   | LangGraph                                                                    |
-| LLM model           | Anthropic Claude Haiku 4.5                                                    |
-| Tutorial components | Hosting agent on AgentCore Runtime. Using LangGraph and Amazon Bedrock Model |
-| Tutorial vertical   | Cross-vertical                                                               |
-| Example complexity  | Easy                                                                         |
-| SDK used            | Amazon BedrockAgentCore Python SDK and boto3                                 |
+## 시작하기
 
-### Tutorial Architecture
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-In this tutorial we will describe how to deploy an existing agent to AgentCore runtime. 
+## 추가 리소스
 
-For demonstration purposes, we will  use a LangGraph agent using Amazon Bedrock models
-
-In our example we will use a very simple agent with two tools: `get_weather` and `get_time`. 
-
-<div style="text-align:left">
-    <img src="images/architecture_runtime.png" width="100%"/>
-</div>
-
-### Tutorial Key Features
-
-* Hosting Agents on Amazon Bedrock AgentCore Runtime
-* Using Amazon Bedrock models
-* Using LangGraph
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

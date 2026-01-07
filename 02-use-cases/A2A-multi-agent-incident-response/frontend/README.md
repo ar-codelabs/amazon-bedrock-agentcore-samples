@@ -1,35 +1,20 @@
 # A2A on Amzon Bedrock AgentCore Runtime Frontend
 
-## Overview
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
+
+## 개요
 
 This is a single-page application that provides a chat interface for interacting with Host Google ADK Agent. The app handles OAuth authentication via AWS Cognito, streams responses from the agent in real-time, and displays the complete agentic workflow including tool invocations and their results.
 
-## Getting Started
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-### Prerequisites
+## 시작하기
 
-- Node.js 18 or higher, use [documentation](https://nodejs.org/en/download).
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-### Installation
+## 추가 리소스
 
-```bash
-cd frontend
-npm install
-```
-
-### Configuration
-
-Create a `.env` file in this directory:
-
-```bash
-chmod +x ./setup-env.sh
-./setup-env.sh
-```
-
-### Running Locally
-
-```bash
-npm run dev
-```
-
-The app will be available at `http://localhost:5173`
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

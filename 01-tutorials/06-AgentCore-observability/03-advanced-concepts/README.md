@@ -1,62 +1,20 @@
 # Advanced Observability Concepts
 
-This section covers advanced observability patterns and techniques for Amazon Bedrock AgentCore, helping you implement sophisticated customized monitoring and debugging capabilities.
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Available Tutorials
+## 개요
 
-### 01-custom-span-creation/
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-- **Notebook**: `Custom_Span_Creation.ipynb`
-- **Description**: Learn to create custom spans for detailed operation tracing
-- **Features**: Manual span creation, custom attributes
-- **Use Cases**: Fine-grained monitoring, debugging
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-### 02-data-protection/
+## 시작하기
 
-- **Notebook**: `data_protection.ipynb`
-- **Description**: Implement comprehensive data protection for sensitive information in agent workflows
-- **Features**: Bedrock Guardrails integration, CloudWatch Logs Data Protection, PII detection and masking
-- **Use Cases**: Compliance (GDPR, HIPAA, CCPA), sensitive data handling, privacy protection
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-## What You'll Learn
+## 추가 리소스
 
-- **Custom Span Creation**: Add detailed tracing to specific operations
-- **Span Attributes**: Enrich traces with custom metadata
-- **Nested Spans**: Create hierarchical trace structures
-- **Performance Monitoring**: Identify bottlenecks in agent workflows
-- **Error Tracking**: Capture and trace exceptions and failures
-- **Data Protection**: Implement sensitive data detection and masking in logs and traces
-- **Compliance Integration**: Configure Bedrock Guardrails and CloudWatch Data Protection
-
-## Getting Started
-
-1. Navigate to the tutorial directory
-2. Copy `.env.example` to `.env` and configure:
-   - AWS credentials
-   - CloudWatch log group settings
-   - OpenTelemetry configuration
-3. Enable CloudWatch Transaction Search in your AWS region
-4. Install dependencies: `pip install -r requirements.txt`
-5. Open and run the Jupyter notebook
-
-## Prerequisites
-
-- Understanding of basic OpenTelemetry concepts
-- Familiarity with Amazon CloudWatch
-- Experience with agent frameworks (recommended)
-- AWS account with appropriate permissions
-
-## Advanced Patterns Covered
-
-- **Manual Instrumentation**: When and how to add custom spans
-- **Custom Metrics**: Creating domain-specific measurements
-- **Data Protection Policies**: Configuring sensitive information filters
-- **Multi-layer Security**: Combining Guardrails with CloudWatch Data Protection
-
-## Cleanup
-
-After completing tutorials:
-
-1. Delete CloudWatch log groups created during examples
-2. Remove any test resources
-3. Clean up environment configuration files
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

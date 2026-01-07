@@ -1,81 +1,20 @@
 # Policy for Amazon Bedrock AgentCore
 
-## Overview
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
+
+## 개요
 
 Policy for Amazon Bedrock AgentCore enables fine-grained access control for AI agents using Cedar policies. It evaluates JWT token claims to determine whether tool invocations should be allowed or denied.
 
-### Architecture
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-```
-                                ┌───────────────────────┐
-                                │  Policy for AgentCore │
-                                │  (Cedar Policies)     │
-                                │                       │
-                                │  Evaluates:           │
-                                │  - principal tags     │
-                                │  - context.input      │
-                                │  - resource           │
-                                └───────────┬───────────┘
-                                            │ attached
-                                            ▼
-┌─────────────────┐             ┌───────────────────────┐             ┌─────────────┐
-│   Amazon        │  JWT Token  │  Amazon Bedrock       │             │   Lambda    │
-│   Cognito       │────────────▶│  AgentCore Gateway    │────────────▶│   Target    │
-│   + AWS Lambda  │  with       │                       │  if ALLOWED │   (Tool)    │
-└─────────────────┘  claims     └───────────────────────┘             └─────────────┘
-```
+## 시작하기
 
-### Tutorial Details
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-| Information          | Details                                                 |
-|:---------------------|:--------------------------------------------------------|
-| AgentCore components | Gateway, Identity, Policy                               |
-| Example complexity   | Intermediate                                            |
-| SDK used             | boto3, requests                                         |
+## 추가 리소스
 
-## Prerequisites
-
-- AWS account with appropriate IAM permissions
-- Amazon Bedrock AgentCore Gateway with OAuth authorizer
-- Amazon Cognito User Pool (M2M client, **Essentials** or **Plus** tier)
-- Python 3.8+
-
-## Getting Started
-
-### Option 1: Setup Script (New Resources)
-
-```bash
-pip install bedrock-agentcore-starter-toolkit
-python setup-gateway.py
-```
-
-### Option 2: Existing Resources
-
-Create `gateway_config.json` with your Gateway and Cognito details (see notebook for template).
-
-### Run the Tutorial
-
-Open [policy_for_agentcore_tutorial.ipynb](policy_for_agentcore_tutorial.ipynb)
-
-## Cedar Policy Syntax
-
-| Pattern | Cedar Syntax |
-|---------|-------------|
-| Check claim exists | `principal.hasTag("claim_name")` |
-| Exact match | `principal.getTag("claim_name") == "value"` |
-| Pattern match | `principal.getTag("claim_name") like "*value*"` |
-| Input validation | `context.input.field <= value` |
-
-## Test Scenarios
-
-1. **Department-Based** - Allow only users from specific departments
-2. **Groups-Based** - Allow users in specific groups (pattern matching)
-3. **Principal ID-Based** - Allow specific client applications
-4. **Combined Conditions** - Multiple conditions with input validation
-
-## Best Practices
-
-- Use `hasTag()` before `getTag()` to avoid errors
-- Use pattern matching carefully - `like "*value*"` can match unintended strings
-- Test both ALLOW and DENY scenarios
-- Use V3_0 Lambda trigger for M2M client credentials flow
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

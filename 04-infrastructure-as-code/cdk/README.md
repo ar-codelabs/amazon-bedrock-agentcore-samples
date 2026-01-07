@@ -1,36 +1,20 @@
 # CDK Samples
 
-Deploy Amazon Bedrock AgentCore resources using AWS CDK (Python).
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-## Prerequisites
+## 개요
 
-- Python 3.8+
-- AWS CDK v2.218.0 or later (for BedrockAgentCore support)
-- AWS CLI configured
-- Access to Amazon Bedrock AgentCore (preview)
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-```bash
-npm install -g aws-cdk
-```
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-## General Deployment Pattern
+## 시작하기
 
-```bash
-cd <sample-directory>
-pip install -r requirements.txt
-cdk deploy
-```
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-## Samples
+## 추가 리소스
 
-- **[basic-runtime/](./basic-runtime/)** - Simple agent deployment
-- **[multi-agent-runtime/](./multi-agent-runtime/)** - Multi-agent system  
-- **[mcp-server-agentcore-runtime/](./mcp-server-agentcore-runtime/)** - MCP Server with JWT authentication
-- **[end-to-end-weather-agent/](./end-to-end-weather-agent/)** - Weather agent with tools and memory
-
-## CDK Advantages
-
-- Uses `DockerImageAsset` for container building (no CodeBuild needed)
-- Cleaner construct separation and reusability
-- Type safety and IDE support
-- Faster deployment times
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)

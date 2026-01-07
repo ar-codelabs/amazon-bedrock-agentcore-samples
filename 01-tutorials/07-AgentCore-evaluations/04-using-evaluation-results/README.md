@@ -1,50 +1,20 @@
 # Evaluation Analyzer
 
-**Scale your AI agent evaluation analysis from days/weeks to minutes.**
+> **참고**: 자세한 영문 내용은 [README_eng.md](README_eng.md)를 참조하세요.
 
-<p align="center">
-  <img src="assets/improvement_loop.svg" alt="Continuous improvement loop for AI agents" width="700">
-</p>
+## 개요
 
-## The Problem
+이 문서는 Amazon Bedrock AgentCore의 기능과 사용법을 설명합니다.
 
-When you evaluate an AI agent at scale, you get hundreds of LLM-as-a-Judge explanations. Each one contains detailed reasoning about why a score was given. No human can read through all of them to find patterns.
+자세한 설명, 코드 예제 및 단계별 지침은 영문 README 파일을 참조하세요.
 
-## What It Does
+## 시작하기
 
-1. **Loads** your evaluation JSON files
-2. **Filters** low-scoring evaluations (configurable threshold)
-3. **Analyzes** failure patterns using AI
-4. **Generates** specific system prompt fixes
+1. 영문 README 파일([README_eng.md](README_eng.md))의 지침을 따르세요
+2. 필요한 사전 요구 사항을 설치하세요
+3. 제공된 노트북 또는 스크립트를 실행하세요
 
-## What You Get
+## 추가 리소스
 
-- **Top 3 problems** with evidence quotes from the LLM judge
-- **Before/after table** showing exact prompt changes
-- **Complete updated system prompt** ready to copy-paste
-
-See [`example_agent_output.md`](example_agent_output.md) for a sample report.
-
-## Quick Start
-
-```bash
-# 1. Install dependencies
-pip install -r requirements.txt
-
-# 2. Add your data
-#    - Place evaluation JSONs in eval_data/
-#    - Edit system_prompt.txt with your agent's prompt
-
-# 3. Run the notebook
-jupyter notebook evaluation_analyzer.ipynb
-```
-
-## Requirements
-
-- Python 3.9+
-- AWS credentials configured for Amazon Bedrock
-- Evaluation data from [Strands Evals](https://github.com/strands-agents/strands-evals) or [AWS AgentCore](https://docs.aws.amazon.com/agentcore/)
-
----
-
-**[Open the notebook](evaluation_analyzer.ipynb) for the full walkthrough and documentation.**
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [메인 README](../README.md)
