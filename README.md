@@ -1,229 +1,189 @@
-* https://github.com/awslabs/amazon-bedrock-agentcore-samples 한글 번역 repo입니다.
+# Samsung Electronics × AWS — AgentCore 전환 프로젝트 딜리버리 로그
 
-<div align="center">
-  <div>
-    <a href="https://aws.amazon.com/bedrock/agentcore/">
-      <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/b8b9456d-c9e2-45e1-ac5b-760f21f1ac18" />
-   </a>
-  </div>
+> 삼성전자 TV Apps Service의 LangGraph 기반 자연어 질의 에이전트를 Amazon Bedrock AgentCore 기반 프로덕션 환경으로 전환하는 프로젝트의 고객 전달 자산(deliverables)을 정리한 문서입니다.
+>
+> 본 repo에는 AgentCore tutorial 및 참고 코드가 함께 포함되어 있으니 참고 바랍니다.
 
-  <h1>
-      Amazon Bedrock AgentCore 샘플
-  </h1>
+---
 
-  <h2>
-    모든 프레임워크와 모델을 사용하여 AI 에이전트를 안전하게 대규모로 배포하고 운영하세요
-  </h2>
+## 목차
 
-  <div align="center">
-    <a href="https://github.com/awslabs/amazon-bedrock-agentcore-samples/graphs/commit-activity"><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/awslabs/amazon-bedrock-agentcore-samples"/></a>
-    <a href="https://github.com/awslabs/amazon-bedrock-agentcore-samples/issues"><img alt="GitHub open issues" src="https://img.shields.io/github/issues/awslabs/amazon-bedrock-agentcore-samples"/></a>
-    <a href="https://github.com/awslabs/amazon-bedrock-agentcore-samples/pulls"><img alt="GitHub open pull requests" src="https://img.shields.io/github/issues-pr/awslabs/amazon-bedrock-agentcore-samples"/></a>
-    <a href="https://github.com/awslabs/amazon-bedrock-agentcore-samples/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/awslabs/amazon-bedrock-agentcore-samples"/></a>
-  </div>
-  
-  <p>
-    <a href="https://docs.aws.amazon.com/bedrock-agentcore/">문서</a>
-    ◆ <a href="https://github.com/aws/bedrock-agentcore-sdk-python">Python SDK</a>
-    ◆ <a href="https://github.com/aws/bedrock-agentcore-starter-toolkit">스타터 툴킷</a>
-    ◆ <a href="https://discord.gg/bedrockagentcore-preview">Discord</a>
-  </p>
-</div>
+1. [프로젝트 개요](#1-프로젝트-개요)
+2. [Sprint 일정](#2-sprint-일정)
+3. [Text2SQL 고도화 전략](#3-text2sql-고도화-전략)
+4. [AgentCore Runtime & Gateway 가이드](#4-agentcore-runtime--gateway-가이드)
+5. [구축 현황](#5-구축-현황)
+6. [발표 구성 및 인사이트](#6-발표-구성-및-인사이트)
+7. [데모 시나리오](#7-데모-시나리오)
+8. [AgentCore Policy 활용 방안](#8-agentcore-policy-활용-방안)
+9. [AgentCore Observability 이슈 및 해결](#9-agentcore-observability-이슈-및-해결)
+10. [참고 자료 링크 모음](#10-참고-자료-링크-모음)
 
-Amazon Bedrock AgentCore 샘플 저장소에 오신 것을 환영합니다!
+---
 
-Amazon Bedrock AgentCore는 프레임워크와 모델에 구애받지 않아, 고급 AI 에이전트를 안전하고 대규모로 배포하고 운영할 수 있는 유연성을 제공합니다. [Strands Agents](https://strandsagents.com/latest/), [CrewAI](https://www.crewai.com/), [LangGraph](https://www.langchain.com/langgraph), [LlamaIndex](https://www.llamaindex.ai/) 또는 다른 프레임워크로 구축하든, 어떤 대규모 언어 모델(LLM)에서 실행하든 Amazon Bedrock AgentCore는 이를 지원하는 인프라를 제공합니다. 전문화된 에이전트 인프라를 구축하고 관리하는 차별화되지 않은 무거운 작업을 제거함으로써, Amazon Bedrock AgentCore를 사용하면 선호하는 프레임워크와 모델을 가져와 코드를 다시 작성하지 않고도 배포할 수 있습니다.
+## 1. 프로젝트 개요
 
-이 컬렉션은 Amazon Bedrock AgentCore 기능을 이해하고, 구현하고, 애플리케이션에 통합하는 데 도움이 되는 예제와 튜토리얼을 제공합니다.
+| 항목 | 내용 |
+|------|------|
+| 목표 | 운영 중인 LangGraph 멀티 에이전트를 Amazon Bedrock AgentCore 기반 프로덕션 환경으로 전환 |
+| 대상 사용자 | PM / Developer / Operator 약 300명 |
+| 데이터소스 | Oracle (STG/PRD), MySQL DB(API), BigQuery(KPI), Athena(KPI) |
+| 에이전트 구조 | Supervisor 패턴 + Sub-Agent (KPI · 앱 지원 · 앱 검색) |
 
-## 🎥 비디오
+> Amazon Bedrock AgentCore를 활용하여 LangGraph 멀티 에이전트를 프로덕션 환경에 배포한 실전 사례를 공유합니다. AgentCore Runtime에서 Supervisor 패턴의 멀티 에이전트를 실행하고, MCP(Model Context Protocol)를 통해 내부 API 등 외부 도구를 표준화된 방식으로 연결합니다. Gateway로 MCP 서버를 중앙 관리하고 에이전트 트래픽을 제어하며, Policy & Identity로 자연어 기반 접근 제어와 Okta IdP 연동을 구현한 과정을 다룹니다. 또한 OpenTelemetry 기반 Observability로 Sub-Agent별 계층적 트레이싱을 구성하고, Evaluation을 CI 파이프라인에 통합하여 에이전트 품질을 자동으로 검증하는 방법을 소개합니다.
 
-Amazon Bedrock AgentCore로 첫 번째 프로덕션 준비 AI 에이전트를 구축하세요. 프로토타이핑을 넘어 Amazon Bedrock AgentCore를 사용하여 첫 번째 에이전트 AI 애플리케이션을 프로덕션화하는 방법을 보여드립니다.
+---
 
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=wzIQDPFQx30"><img src="https://markdown-videos-api.jorgenkh.no/youtube/wzIQDPFQx30?width=640&height=360&filetype=jpeg" /></a>
-</p>
+## 2. Sprint 일정
 
-## 📁 저장소 구조
+| Sprint | 일정 | 주제 |
+|--------|------|------|
+| 1주 | 3/27 (금) | AgentCore — Runtime, Gateway |
+| 2주 | 4/2 (목) | AgentCore — Memory, Observability, Evaluation |
+| 3주 | 4/10 (금) | AgentCore — Identity, Policy |
+| 4주 | 4/17 (금) | 최종 검증 |
 
-### 📚 [`01-tutorials/`](./01-tutorials/)
-**대화형 학습 및 기초**
+---
 
-이 폴더에는 실습 예제를 통해 Amazon Bedrock AgentCore 기능의 기본 사항을 가르치는 노트북 기반 튜토리얼이 포함되어 있습니다.
+## 3. Text2SQL 고도화 전략
 
-구조는 AgentCore 구성 요소별로 나뉩니다:
-* **[Runtime](./01-tutorials/01-AgentCore-runtime)**: Amazon Bedrock AgentCore Runtime은 프레임워크, 프로토콜 또는 모델 선택에 관계없이 조직이 AI 에이전트와 도구를 배포하고 확장할 수 있도록 지원하는 안전한 서버리스 런타임 기능으로, 빠른 프로토타이핑, 원활한 확장 및 시장 출시 시간 단축을 가능하게 합니다
-* **[Gateway](./01-tutorials/02-AgentCore-gateway)**: AI 에이전트는 데이터베이스 검색부터 메시지 전송까지 실제 작업을 수행하기 위해 도구가 필요합니다. Amazon Bedrock AgentCore Gateway는 API, Lambda 함수 및 기존 서비스를 MCP 호환 도구로 자동 변환하여 개발자가 통합을 관리하지 않고도 이러한 필수 기능을 에이전트에 빠르게 제공할 수 있도록 합니다.
-* **[Memory](./01-tutorials/04-AgentCore-memory)**: Amazon Bedrock AgentCore Memory를 사용하면 개발자가 완전 관리형 메모리 인프라와 필요에 맞게 메모리를 사용자 정의할 수 있는 기능을 통해 풍부하고 개인화된 에이전트 경험을 쉽게 구축할 수 있습니다.
-* **[Identity](./01-tutorials/03-AgentCore-identity)**: Amazon Bedrock AgentCore Identity는 Okta, Entra 및 Amazon Cognito와 같은 표준 ID 공급자를 지원하면서 AWS 서비스 및 Slack, Zoom과 같은 타사 애플리케이션 전반에 걸쳐 원활한 에이전트 ID 및 액세스 관리를 제공합니다.
-* **[Tools](./01-tutorials/05-AgentCore-tools)**: Amazon Bedrock AgentCore는 에이전트 AI 애플리케이션 개발을 단순화하기 위해 두 가지 내장 도구를 제공합니다: Amazon Bedrock AgentCore **Code Interpreter** 도구는 AI 에이전트가 코드를 안전하게 작성하고 실행할 수 있도록 하여 정확성을 향상시키고 복잡한 엔드투엔드 작업을 해결하는 능력을 확장합니다. Amazon Bedrock AgentCore **Browser Tool**은 AI 에이전트가 완전 관리형 보안 샌드박스 환경에서 낮은 지연 시간으로 사람과 같은 정밀도로 웹사이트를 탐색하고, 다단계 양식을 작성하고, 복잡한 웹 기반 작업을 수행할 수 있도록 하는 엔터프라이즈급 기능입니다
-* **[Observability](./01-tutorials/06-AgentCore-observability)**: Amazon Bedrock AgentCore Observability는 개발자가 통합 운영 대시보드를 통해 에이전트 성능을 추적, 디버그 및 모니터링할 수 있도록 지원합니다. OpenTelemetry 호환 텔레메트리 지원과 에이전트 워크플로의 각 단계에 대한 상세한 시각화를 통해 Amazon Bedrock AgentCore Observability는 개발자가 에이전트 동작에 대한 가시성을 쉽게 확보하고 대규모로 품질 표준을 유지할 수 있도록 합니다.
+### 3.1 High Accuracy Text2SQL System (AIML Specialist 문곤수)
 
-* **[AgentCore 엔드투엔드](./01-tutorials/07-AgentCore-E2E)**: 이 튜토리얼에서는 Amazon Bedrock AgentCore 서비스를 사용하여 고객 지원 에이전트를 프로토타입에서 프로덕션으로 이동합니다.
+AIML Specialist가 작성한 Text2SQL 고도화 전략 방안 요약입니다.
+(문서: `260303_text2sql_rag_ontology_architecture_v2.0_moongonsoo.pdf`)
 
+- **3-Tier 온톨로지 RAG**: 스키마 메타(BM25 중심) / 비즈니스 규칙(Vector 중심) / 검증 쿼리(균형)를 Tier별 가중치 하이브리드 검색으로 LLM에 맥락 주입
+- **Domain-First 라우팅**: 경량 LLM으로 도메인 분류 → 검색 범위 축소 → Schema Linking 기반 Direct / Clarify / Decompose 3-경로 분기
+- **Clarify Loop**: 모호한 질의 감지 시 어휘적/범위/참조 유형별 선택지를 사용자에게 제시하여 능동적 해소
+- **4-Level 검증**: AST 구문 → 스키마 일치 → DB 실행 → 역번역(SQL→자연어 의도 비교) 순차 검증, 실패 시 자동 재생성
+- **Thumbs Up Template 캐싱**: SQL을 파라미터 템플릿으로 추상화 → 사용자 승인 쿼리만 캐시 → 이중 검증(의미 유사도 + 템플릿 구조) 후 값 바인딩 반환
+- **Flywheel 선순환**: 사용 증가 → 캐시 축적 + Clarify 패턴의 규칙 승격 → 정확도 향상 → 사용 증가
 
-제공된 예제는 초보자와 AI 에이전트 애플리케이션을 구축하기 전에 기본 개념을 이해하려는 사람들에게 완벽합니다.
+### 3.2 AWS 고객 사례 — IGAWorks AI 에이전트 '클레어'
 
-### 💡 [`02-use-cases/`](./02-use-cases/)
-**엔드투엔드 애플리케이션**
+2025 AWS Industry Week 발표 "Text2SQL로 완성한 데이터 분석 에이전트" 관련 블로그입니다. IGAWorks가 Amazon Bedrock 기반으로 개발한 '클레어'는 SQL 지식이 없는 마케터도 자연어로 복잡한 데이터 분석을 수행할 수 있게 합니다.
 
-Amazon Bedrock AgentCore 기능을 적용하여 실제 비즈니스 문제를 해결하는 방법을 보여주는 실용적인 사용 사례 구현을 살펴보세요.
+- 1부 (기획 배경 · 전반 아키텍처): https://aws.amazon.com/ko/blogs/tech/iganetworks-text2sql-agent-with-bedrock-1/
+- 2부 (멀티 에이전트 구조 · RAG 상세 설계 · LLM 프롬프트 · 성능 관리): https://aws.amazon.com/ko/blogs/tech/iganetworks-text2sql-agent-with-bedrock-2/
 
-각 사용 사례에는 상세한 설명과 함께 AgentCore 구성 요소에 중점을 둔 완전한 구현이 포함되어 있습니다.
+> 자연어 질문의 모호함 분석, 스키마 및 샘플 쿼리 기반 쿼리 생성 가이드, 데이터 격리 방안, 데이터 시각화 등 실무 방법론 참고.
 
-### 🔌 [`03-integrations/`](./03-integrations/)
-**프레임워크 및 프로토콜 통합**
+### 3.3 Text2SQL Optimization 문서 (SA 이혜원)
 
-Strands Agents, LangChain 및 CrewAI와 같은 인기 있는 에이전트 프레임워크와 Amazon Bedrock AgentCore 기능을 통합하는 방법을 알아보세요.
+Text2SQL 최적화 관련 SA 이혜원 작성 문서 별도 전달 완료.
 
-A2A를 사용한 에이전트 간 통신 및 다양한 다중 에이전트 협업 패턴을 설정하세요. 에이전트 인터페이스를 통합하고 다양한 진입점에서 Amazon Bedrock AgentCore를 사용하는 방법을 배우세요.
+---
 
-### 🏗️ [`04-infrastructure-as-code/`](./04-infrastructure-as-code/)
-**배포 자동화 및 인프라**
+## 4. AgentCore Runtime & Gateway 가이드
 
-코드형 인프라로 Amazon Bedrock AgentCore 리소스를 배포하세요. CloudFormation, AWS CDK 또는 Terraform을 사용한 예제를 제공합니다.
+### 4.1 가이드 문서
 
-기본 런타임, MCP 서버, 다중 에이전트 시스템 및 도구와 메모리가 포함된 완전한 에이전트 솔루션을 위한 프로덕션 준비 템플릿으로 인프라 프로비저닝을 자동화하세요.
+- AgentCore Runtime / Gateway 가이드 PDF 전달 완료.
 
-### 🚀 [`05-blueprints/`](./05-blueprints/)
-**풀스택 참조 애플리케이션**
+### 4.2 AgentCore 코드 참고
 
-Amazon Bedrock AgentCore를 기반으로 구축된 완전하고 배포 준비가 된 에이전트 애플리케이션으로 개발을 빠르게 시작하세요.
+- Runtime 코드: https://github.com/kyopark2014/mcp-runtime
+- 대한항공 Agentic AI PoC 코드: https://github.com/aws-samples/sample-agentic-ai-platform-with-agentcore
 
-각 블루프린트는 사용 사례에 맞게 사용자 정의하고 배포할 수 있는 통합 서비스, 인증 및 비즈니스 로직이 포함된 포괄적인 기반을 제공합니다.
+---
 
-## 노트북 실행하기
+## 5. 구축 현황
 
-1. 가상 환경 생성 및 활성화
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-2. 종속성 설치
-```bash
-pip install -r requirements.txt
-```
+| 구성요소 | 현황 |
+|---------|------|
+| **Runtime** | Cognito 인증 기반 구성 완료 |
+| **Gateway** | MCP target 3개 구성, user 질문 내용 기반 동적 라우팅 |
+| **접근 제어** | 검증계/운영계 user 레벨 접근 제어는 현재 요건 없음으로 확인 |
+| **Memory** | Short-Term Memory 사용 |
+| **멀티 데이터소스** | Oracle STG(서울), Oracle PRD(버지니아), BigQuery(KPI) |
+| **향후 계획** | Superset DB → S3 이관 후 Glue + Athena 쿼리 예정 |
 
-3. 노트북 실행에 필요한 AWS 자격 증명 내보내기/활성화
+---
 
-4. Jupyter 노트북에서 사용할 커널로 가상 환경 등록
-```bash
-python -m ipykernel install --user --name=notebook-venv --display-name="Python (notebook-venv)"
-```
+## 6. 발표 구성 및 인사이트
 
-다음을 사용하여 커널 목록을 확인할 수 있습니다:
-```bash
-jupyter kernelspec list
-```
+### 6.1 경험 소개
+- 운영 중인 LangGraph → AgentCore 전환 완료 (마이그레이션 순서, 기간, 코드 변경량, 레슨런 공유)
+- LangGraph + AgentCore Gateway + MCP + BigQuery(GCP) + AWS DB — 멀티클라우드 + 멀티DB를 Gateway 하나로 추상화한 사례
 
-5. 노트북을 실행하고 올바른 커널이 선택되었는지 확인
-```bash
-jupyter notebook path/to/your/notebook.ipynb
-```
+### 6.2 Gateway
+- Gateway 단일 endpoint 구조
+- 새 데이터소스 추가 시 Agent 코드 변경 없이 target 등록만으로 즉시 반영
+- Text2SQL AS-IS vs TO-BE 비교
+- Gateway 시맨틱 검색 활성화
 
-**중요:** Jupyter에서 노트북을 연 후 `Kernel` → `Change kernel` → "Python (notebook-venv)" 선택으로 이동하여 올바른 커널을 선택하여 가상 환경 패키지를 사용할 수 있도록 하세요.
+### 6.3 Observability + Evaluation CI
+- AS-IS vs TO-BE Observability 비교: LangGraph(블랙박스) vs AgentCore(모든 trace 가시화), Tool 호출 병목 찾는 과정 시연
+- Evaluation CI 실패 → 배포 차단: Text2SQL 정확도 낮으면 CI가 자동 Evaluation 후 배포 차단
 
+### 6.4 추가 아이디어
+- **Runtime**: 스케일링/컨테이너/가용성 관리형 전환
+- **Memory**: 멀티턴 vs 싱글턴 비교
+- **Identity + Policy**: Cognito 인증, Cedar 기반 세밀한 접근 제어
 
-## 빠른 시작 - [Amazon Bedrock AgentCore Runtime](https://github.com/aws/bedrock-agentcore-starter-toolkit/blob/main/documentation/docs/user-guide/runtime/quickstart.md)
+---
 
-### 1단계: 사전 요구 사항
+## 7. 데모 시나리오
 
-- 자격 증명이 구성된 [AWS 계정](https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fportal.aws.amazon.com%2Fbilling%2Fsignup%2Fresume&client_id=signup) (`aws configure`)
-- [Python 3.10](https://www.python.org/downloads/) 이상
-- [Docker](https://www.docker.com/) 또는 [Finch](https://runfinch.com/) 설치 및 실행 - 로컬 개발용만
-- 모델 액세스: [Amazon Bedrock 콘솔](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html)에서 Anthropic Claude 4.0 활성화
-- AWS 권한:
-    - `BedrockAgentCoreFullAccess` 관리형 정책
-    - `AmazonBedrockFullAccess` 관리형 정책
-    - `호출자 권한`: 자세한 정책은 [여기](https://github.com/aws/bedrock-agentcore-starter-toolkit/blob/main/documentation/docs/user-guide/runtime/permissions.md#developercaller-permissions) 참조
+1. **Query 고도화** — Text2SQL AS-IS vs TO-BE
+2. **멀티 데이터소스 크로스 쿼리**
 
-### 2단계: 설치 및 에이전트 생성
+> 구체적 시나리오는 추가 정리하여 공유 예정. 추가 데모 아이디어 수렴 중.
 
-```bash
-# 두 패키지 모두 설치
-pip install bedrock-agentcore strands-agents bedrock-agentcore-starter-toolkit
-```
+---
 
-`my_agent.py` 생성:
+## 8. AgentCore Policy 활용 방안
 
-```python
-from bedrock_agentcore import BedrockAgentCoreApp
-from strands import Agent
+> 미팅에서 논의한 대로, 고객 use-case에 필요 없는 기능이면 제외해도 무방합니다.
 
-app = BedrockAgentCoreApp()
-agent = Agent()
+**참고 튜토리얼** (AIML Specialist 문곤수): https://github.com/gonsoomoon-ml/amazon-bedrock-agentcore-policy-tutorials
 
-@app.entrypoint
-def invoke(payload):
-    """AI 에이전트 함수"""
-    user_message = payload.get("prompt", "안녕하세요! 무엇을 도와드릴까요?")
-    result = agent(user_message)
-    return {"result": result.message}
+### 활용 방안
 
-if __name__ == "__main__":
-    app.run()
-```
-`requirements.txt` 생성:
+- **MCP Tool read-only 강제** — "`get_*`으로 시작하는 Tool만 허용, insert/update/delete 관련 Tool 차단". 나중에 누군가 실수로 write Tool을 추가해도 Policy가 차단.
+- **특정 테이블/데이터 접근 제한** — "`app_master` 테이블은 허용, 개인정보가 있는 `user_info` 테이블은 차단"
+- **호출 빈도 제한** — "동일 사용자가 1분에 10회 이상 Tool 호출 시 차단" (운영 챗봇의 비정상 호출 방지)
+- **향후 user 구분 확장 대비** — Cedar로 작성해두면, 나중에 Cognito user 속성(role, department)을 조건으로 추가할 때 코드 변경 없이 정책 파일만 수정하면 됨
 
-```bash
-cat > requirements.txt << EOF
-bedrock-agentcore
-strands-agents
-EOF
-```
-### 3단계: 로컬 테스트
+### 인증 → 인가 → 실행 흐름
 
-```bash
-# 에이전트 시작
-python my_agent.py
+1. **인증** — Amazon Cognito로 사용자 확인 및 JWT 토큰 발급
+2. **인가** — Cedar 정책 언어로 "이 사용자가 이 작업을 할 수 있는가?" 판단
+3. **실행** — 권한이 있을 때만 실제 도구(Lambda 또는 MCP 서버) 실행
 
-# 테스트 (다른 터미널에서)
-curl -X POST http://localhost:8080/invocations \
-  -H "Content-Type: application/json" \
-  -d '{"prompt": "안녕하세요!"}'
-```
-성공: {"result": "안녕하세요! 도와드리겠습니다..."}와 같은 응답이 표시되어야 합니다
+---
 
-### 4단계: AWS에 배포
+## 9. AgentCore Observability 이슈 및 해결
 
-```bash
-# 구성 및 배포 (필요한 모든 리소스 자동 생성)
-agentcore configure -e my_agent.py
-agentcore launch
+### 9.1 Evaluation 관련 파싱 에러
 
-# 배포된 에이전트 테스트
-agentcore invoke '{"prompt": "농담 하나 해줘"}'
-```
+- AWS supported frameworks에는 `opentelemetry-` / `openinference-` 두 가지 instrumentation 방식이 있습니다.
+- `opentelemetry-instrumentation-langchain`은 버전에 따라 lc 포맷을 **attributes**에 넣는 버전과 **events body**에 넣는 버전이 있습니다. (참고: [Download span logs 문서](https://docs.aws.amazon.com/ko_kr/bedrock-agentcore/latest/devguide/getting-started-on-demand.html#download-span-logs))
+- **해결**: `opentelemetry-instrumentation-langchain` 최신 버전으로 설치하거나, `openinference-instrumentation-langchain`으로 변경.
+- **검증 완료**: `openinference-instrumentation-langchain`으로 변경하여 테스트한 결과 파싱이 정상 동작함을 확인.
 
-축하합니다! 이제 에이전트가 Amazon Bedrock AgentCore Runtime에서 실행되고 있습니다!
+### 9.2 Span duration 지표
 
-[Gateway](https://github.com/aws/bedrock-agentcore-starter-toolkit/blob/main/documentation/docs/user-guide/gateway/quickstart.md), [Identity](https://github.com/aws/bedrock-agentcore-starter-toolkit/blob/main/documentation/docs/user-guide/identity/quickstart.md), [Memory](https://github.com/aws/bedrock-agentcore-starter-toolkit/blob/main/documentation/docs/user-guide/memory/quickstart.md), [Observability](https://github.com/aws/bedrock-agentcore-starter-toolkit/blob/main/documentation/docs/user-guide/observability/quickstart.md) 및 [내장 도구](https://github.com/aws/bedrock-agentcore-starter-toolkit/tree/main/documentation/docs/user-guide/builtin-tools)에 대한 빠른 시작 가이드를 따르세요.
+- 콘솔에 표시되는 duration은 **OpenTelemetry 표준 Span duration 지표**이며, **마이크로초(μs) 단위**로 표시됩니다.
 
-## 🔗 관련 링크:
+---
 
-- [Amazon Bedrock AgentCore 시작하기 - 워크샵](https://catalog.us-east-1.prod.workshops.aws/workshops/850fcd5c-fd1f-48d7-932c-ad9babede979/en-US)
-- [Bedrock AgentCore 심층 분석 - 워크샵](https://catalog.workshops.aws/agentcore-deep-dive/en-US)
-- [Amazon Bedrock AgentCore 가격](https://aws.amazon.com/bedrock/agentcore/pricing/)
-- [Amazon Bedrock AgentCore FAQ](https://aws.amazon.com/bedrock/agentcore/faqs/)
+## 10. 참고 자료 링크 모음
 
-## 🤝 기여하기
+### AgentCore 튜토리얼 시리즈 (영상 + 블로그)
+- AgentCore Runtime
+- Code Interpreter & Browser
+- Identity
+- Memory
+- Gateway
+- Observability
 
-기여를 환영합니다! 자세한 내용은 [기여 가이드라인](CONTRIBUTING.md)을 참조하세요:
+### 코드 저장소
+- AgentCore Runtime 코드: https://github.com/kyopark2014/mcp-runtime
+- 대한항공 Agentic AI PoC: https://github.com/aws-samples/sample-agentic-ai-platform-with-agentcore
+- AgentCore Policy 튜토리얼: https://github.com/gonsoomoon-ml/amazon-bedrock-agentcore-policy-tutorials
 
-- 새로운 샘플 추가
-- 기존 예제 개선
-- 문제 보고
-- 개선 사항 제안
-
-
-## 📄 라이선스
-
-이 프로젝트는 Apache License 2.0에 따라 라이선스가 부여됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
-
-## 기여자
-
-<a href="https://github.com/awslabs/amazon-bedrock-agentcore-samples/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=awslabs/amazon-bedrock-agentcore-samples" />
-</a>
+### AWS 공식 문서
+- [Amazon Bedrock AgentCore 문서](https://docs.aws.amazon.com/bedrock-agentcore/)
+- [On-demand Evaluation / Span 로그 다운로드](https://docs.aws.amazon.com/ko_kr/bedrock-agentcore/latest/devguide/getting-started-on-demand.html#download-span-logs)
+- [Gateway 지원 target](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway-supported-targets.html)
